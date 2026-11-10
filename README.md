@@ -5,7 +5,7 @@
 | 工作区 | 代码归属 | 入口 |
 |---|---|---|
 | `weichai/` | RECAST 产品。SAG2 检索、JEV、SQLite FTS5 索引、项目流水线、翻译运行时以及 Windows 写入修复 | 产品目录 `services/code-intelligence-service/src/`、`apps/vscode-extension/src/project-pipeline*.ts`、`services/adaptation-service/src/` |
-| `recast-bench/` | 本分支。负责出题、冻结输入、调用产品和模型、运行对照组、外部验收、计时、计费及发布报告 | [实验源码](src/) · [已发布结果](results/) · [端到端协议](PROJECT-BENCH.md) |
+| `recast-bench/` | 本仓库。负责出题、冻结输入、调用产品和模型、运行对照组、外部验收、计时、计费及发布报告 | [实验源码](src/) · [已发布结果](results/) · [端到端协议](PROJECT-BENCH.md) |
 
 例如，SAG2 的 BM25 策略在产品的 `sag2-bm25.ts` 和 `sag2-retrieval.ts`。评测时选哪些公开文件建库、如何比较 SAG2 与 rawagent，写在 bench 的 [索引适配器](src/real-projects/method-index.ts) 和 [执行方法](src/real-projects/methods.ts)。Django、coverage.py、BullMQ 和 Camel 是固定版本的上游输入。
 
@@ -27,11 +27,11 @@ S01–S10 提供构造的历史资产和检索真值。后三套交付评测主�
 
 ## 检出与版本对应
 
-在同一父目录检出两个工作区。下例选择十万行级正式批次。分支内的 [增量 Git bundle](repro/recast-runtime.bundle) 保存基于已发布产品提交的两次 Windows 文件锁修复，使读者可以检出实测时的精确产品版本。
+在同一父目录分别克隆产品仓库和评测仓库，目录名保持为 `weichai` 和 `recast-bench`。下例选择十万行级正式批次。[增量 Git bundle](repro/recast-runtime.bundle) 保存基于已发布产品提交的两次 Windows 文件锁修复，使读者可以检出实测时的精确产品版本。
 
 ```powershell
 git clone --branch feat/sag2-retrieval https://github.com/chiparon/RECAST.git weichai
-git clone --single-branch --branch feat/bench/sag2 https://github.com/chiparon/RECAST.git recast-bench
+git clone https://github.com/chiparon/recast-bench.git recast-bench
 git -C weichai fetch ../recast-bench/repro/recast-runtime.bundle refs/heads/feat/sag2-retrieval
 git -C weichai switch --detach 5ba062a437142a40f15bf886114ae6065a154b25
 cd weichai
