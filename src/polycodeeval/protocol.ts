@@ -6,7 +6,7 @@ import { sha } from "../real-projects/inputs.ts";
 
 export const arms = ["recast", "sag2sql", "rawagent", "codex"] as const;
 export type Arm = (typeof arms)[number];
-export const batchName = "poly-v5";
+export const batchName = "poly-v6";
 export const resultsRoot = (batch: string) =>
   resolve("results/polycodeeval-bench", batch);
 export const workRoot = resolve("work/pb");

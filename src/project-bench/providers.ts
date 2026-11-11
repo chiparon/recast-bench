@@ -27,6 +27,8 @@ export interface ProviderCall {
   model: ProjectModel;
   servedModel?: string;
   responseId?: string;
+  requestId?: string;
+  providerError?: { code?: string; type?: string; param?: string; message?: string };
   httpStatus?: number;
   status: "ok" | "error";
   error?: string;
@@ -58,7 +60,7 @@ interface ProviderResponse {
   model?: string;
   status?: string;
   incomplete_details?: { reason?: string };
-  error?: { code?: string; message?: string };
+  error?: { code?: string | null; type?: string; param?: string | null; message?: string };
   output?: OutputItem[];
   usage?: {
     input_tokens?: number;
@@ -212,6 +214,7 @@ export function createProjectClient(
           modelKeyEnvironment(model),
       );
     const turn = ++turns;
+    const redact = (value: string) => value.split(key).join("[redacted]").replace(/sk-[^\s"']+/g, "[redacted]");
     const body = JSON.stringify({
       model,
       input: inputItems(messages),
@@ -253,6 +256,7 @@ export function createProjectClient(
           body,
         });
         row.httpStatus = response.status;
+        row.requestId = response.headers.get("x-request-id") ?? undefined;
         retry = [408, 429, 500, 502, 503, 504].includes(response.status);
         decoded = (await response.json()) as ProviderResponse;
         row.usage = reportedUsage(decoded);
@@ -260,11 +264,15 @@ export function createProjectClient(
         row.responseId = decoded.id;
         if (!response.ok) {
           if (decoded.error?.code === "insufficient_quota") retry = false;
-          throw new Error(
-            "HTTP " +
-              response.status +
-              (decoded.error?.code ? " " + decoded.error.code : ""),
-          );
+          if (decoded.error) {
+            row.providerError = {};
+            for (const field of ["code", "type", "param", "message"] as const) {
+              const value = decoded.error[field];
+              if (typeof value === "string") row.providerError[field] = redact(value).slice(0, 4096);
+            }
+          }
+          const detail = row.providerError;
+          throw new Error([`HTTP ${response.status}`, detail?.code, detail?.message].filter(Boolean).join(" "));
         }
         if (decoded.status !== "completed" || !Array.isArray(decoded.output))
           throw new Error(
@@ -311,11 +319,7 @@ export function createProjectClient(
         row.status = "ok";
         return { content: text.join("\n"), toolCalls };
       } catch (e) {
-        row.error = (e instanceof Error ? e.message : String(e))
-          .split(key)
-          .join("[redacted]")
-          .replace(/sk-[^\s"']+/g, "[redacted]")
-          .slice(0, 500);
+        row.error = redact(e instanceof Error ? e.message : String(e)).slice(0, 4096);
         if (attempt >= 3 || signal.aborted || (response && !retry))
           throw new Error(model + ": " + row.error);
       } finally {
