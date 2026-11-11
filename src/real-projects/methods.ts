@@ -38,7 +38,7 @@ const byExtension: Record<string, string> = {
 function targetLanguage(unit: MethodTask["modules"][number]) {
   return unit.language ?? byExtension[extname(unit.path)] ?? "Text";
 }
-function projectModules(task: MethodTask) {
+export function projectModules(task: MethodTask) {
   const supported: Language[] = [
     "TypeScript",
     "Python",
@@ -76,6 +76,25 @@ function projectModules(task: MethodTask) {
       };
     }),
   );
+}
+
+export async function searchRealModule(
+  refs: Awaited<ReturnType<typeof openRealIndex>>, module: ProjectPipelineModule,
+  description: string, signal: AbortSignal, retrieval?: MethodOptions["retrieval"],
+) {
+  let hopsExecuted = 0;
+  let newIds: readonly string[] = [];
+  const candidates = await searchModulesWithSag2(refs.store, {
+    target: module.target, requirement: description, repositoryIds: [refs.repositoryId], topK: 3,
+  }, signal, {
+    maxHops: 2, ...retrieval,
+    observeDiagnostics(d) {
+      hopsExecuted = d.hopsExecuted;
+      newIds = d.hop2NewlyDiscoveredIds;
+    },
+  });
+  const newTopPaths = candidates.filter((c) => newIds.includes(c.id)).flatMap((c) => c.sourceModule?.sourceFiles ?? []);
+  return { candidates, hopsExecuted, newTopPaths };
 }
 
 export async function runRealMethod(options: MethodOptions) {
@@ -121,7 +140,7 @@ export async function runRealMethod(options: MethodOptions) {
     100,
   );
   const translations: { unit: string; record: WorkspaceTranslationRun }[] = [];
-  const selectedHistory: { unit: string; paths: string[] }[] = [];
+  const selectedHistory: { unit: string; paths: string[]; hopsExecuted?: number; newTopPaths?: string[] }[] = [];
   const modules = projectModules(task);
   const pipeline = new ProjectPipeline({
     prepare: async (_, s) => {
@@ -144,22 +163,12 @@ export async function runRealMethod(options: MethodOptions) {
     },
     search: async (module, _, s) => {
       const unit = task.modules.find((u) => u.name === module.id)!;
-      const candidates = refs
-        ? await searchModulesWithSag2(
-            refs.store,
-            {
-              target: module.target,
-              requirement: unit.description,
-              repositoryIds: [refs.repositoryId],
-              topK: 3,
-            },
-            s,
-            { maxHops: 2 },
-          )
-        : [];
+      const search = refs && await searchRealModule(refs, module, unit.description, s, options.retrieval);
+      const candidates = search?.candidates ?? [];
       module.selectedCandidateIds = candidates.map((c) => c.id);
       selectedHistory.push({
         unit: module.id,
+        ...(options.retrieval && search && { hopsExecuted: search.hopsExecuted, newTopPaths: search.newTopPaths }),
         paths: [
           ...new Set(
             candidates.flatMap((c) => c.sourceModule?.sourceFiles ?? []),

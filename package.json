@@ -3,6 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prepare:asset-pilot": "node launch.mjs scripts/prepare-asset-pilot.ts",
+    "bench:asset-pilot": "node launch.mjs src/asset-pilot/run.ts",
+    "report:asset-pilot": "node launch.mjs src/asset-pilot/report.ts",
     "bench:poly": "node launch.mjs src/polycodeeval/run.ts",
     "report:poly": "node launch.mjs src/polycodeeval/report.ts",
     "verify:poly": "node launch.mjs src/polycodeeval/verify.ts",

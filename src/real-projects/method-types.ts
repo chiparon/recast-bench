@@ -23,6 +23,7 @@ export interface MethodTask {
 
 export interface MethodOptions {
   arm: "rawagent" | "recast" | "sag2sql";
+  retrieval?: { maxHops: 1 | 2; expandOnBridgeTerms: boolean };
   task: MethodTask;
   sourceRoot: string;
   runRoot: string;
