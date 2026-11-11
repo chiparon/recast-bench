@@ -1,4 +1,4 @@
-import { copyFile, mkdir, writeFile } from "node:fs/promises";
+import { cp, copyFile, mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { CodeIntelligenceHost } from "../../../weichai/apps/vscode-extension/src/code-intelligence-host.ts";
 import type { ProjectModuleProposal } from "../../../weichai/packages/contracts/src/index.ts";
@@ -26,7 +26,12 @@ export async function openRealIndex(
     join(localPath, "package.json"),
     JSON.stringify({ name: "upstream-public-reference-view", private: true }),
   );
+  if (task.fullHistoryRoot) {
+    // Preserve repository layout, project descriptors and all tracked source files.
+    await cp(join(sourceRoot, task.fullHistoryRoot), join(localPath, task.fullHistoryRoot), { recursive: true });
+  }
   for (const path of task.referenceFiles) {
+    if (task.fullHistoryRoot && path.startsWith(task.fullHistoryRoot + "/")) continue;
     signal.throwIfAborted();
     await mkdir(dirname(join(localPath, path)), { recursive: true });
     await copyFile(join(sourceRoot, path), join(localPath, path));

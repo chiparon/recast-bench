@@ -3,6 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "bench:poly": "node launch.mjs src/polycodeeval/run.ts",
+    "report:poly": "node launch.mjs src/polycodeeval/report.ts",
+    "verify:poly": "node launch.mjs src/polycodeeval/verify.ts",
     "bench:large": "node launch.mjs src/large-projects/run.ts",
     "report:large": "node launch.mjs src/large-projects/report.ts",
     "verify:large": "node launch.mjs src/large-projects/verify.ts",

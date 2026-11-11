@@ -7,6 +7,8 @@ export interface Check {
   id: string;
   passed: boolean;
   error?: string;
+  /** Optional per-test-case results for partial-credit scoring. */
+  cases?: { name: string; passed: boolean }[];
 }
 export interface RealFixture {
   id: string;

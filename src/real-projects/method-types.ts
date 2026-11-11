@@ -14,6 +14,7 @@ export interface MethodTask {
   }[];
   readFiles: string[];
   referenceFiles: string[];
+  fullHistoryRoot?: "refs/history";
   compileCommand: WorkspaceCompileCommand;
   testCommand: WorkspaceCompileCommand;
   moduleTestCommands?: Record<string, WorkspaceCompileCommand>;
