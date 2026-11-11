@@ -236,12 +236,13 @@ export async function runRealMethod(options: MethodOptions) {
       module.authorizedFiles = scope.profile.writeFiles;
       await hooks.onCheckpoint?.();
       const combined = AbortSignal.any([hooks.signal, signal]);
+      const scopedCompile = unit && task.moduleCompileCommands?.[unit.name];
       const scopedTest = unit
         ? task.moduleTestCommands?.[unit.name]
         : task.testCommand;
       const runtime = new WorkspaceTranslationRuntime({
         workspaceRoot: root,
-        compileCommand: compile,
+        compileCommand: scopedCompile ? publicCommand(scopedCompile) : compile,
         maxModelTurns: 1000,
         timeoutMs: 7_200_000,
         client: {

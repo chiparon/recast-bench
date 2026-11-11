@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RECAST Benchmark · 仓库题目介绍</title>
+<style>
+:root{color-scheme:light;--ink:#1b2b31;--muted:#495d64;--line:#ccd5d4;--accent:#165f58}
+*{box-sizing:border-box}
+body{margin:0;background:#f8f9f6;color:var(--ink);font:16px/1.75 "Source Sans 3","Microsoft YaHei",sans-serif}
+main{max-width:980px;margin:auto;padding:44px clamp(18px,5vw,64px) 70px}
+h1,h2,h3{line-height:1.35;margin:0;text-wrap:balance}h1{font-size:clamp(2rem,5vw,3.4rem)}h2{margin:2.2rem 0 .6rem;font-size:1.6rem}h3{font-size:1.16rem}
+p{margin:.55rem 0 1rem}a{color:var(--accent);text-underline-offset:.2em}a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+nav{display:flex;gap:10px 22px;flex-wrap:wrap;padding:12px 0;border-block:1px solid var(--line)}
+article{background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);padding:18px 22px;margin:14px 0}
+article header{display:flex;justify-content:space-between;gap:6px 16px;flex-wrap:wrap;align-items:baseline}
+header span,code{color:var(--muted)}dl{display:grid;grid-template-columns:3em 1fr;gap:.45rem .5rem;margin:0}dt{font-weight:700;color:var(--accent)}dd{margin:0;min-width:0}
+code{font: .88em/1.5 "IBM Plex Mono",Consolas,monospace;overflow-wrap:anywhere}dd code{display:block}li{margin:.5rem 0}
+.loc-scroll{overflow-x:auto}.loc-scroll table{border-collapse:collapse;width:100%;min-width:640px;font-variant-numeric:tabular-nums}
+.loc-scroll th,.loc-scroll td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:right}
+.loc-scroll th:first-child{text-align:left}.loc-scroll thead{background:#e6efeb}.loc-scroll tbody th{font-weight:500}
+@media(max-width:560px){main{padding-top:24px}article{padding:14px}article header{display:block}}
+@media print{body{background:white}main{max-width:none;padding:0}article{break-inside:avoid}nav{display:none}}
+</style>
+</head>
+<body><main>
+<h1>RECAST Benchmark 题目介绍</h1>
+<p>本仓库用固定题目评测历史代码检索和项目交付。当前的 PolyCodeEval 题组覆盖五种语言，每个项目各有一道全项目骨架题（L1）和一道双模块补全题（L2），共 10 道。</p>
+<nav aria-label="目录"><a href="#poly">PolyCodeEval 题目</a><a href="#grading">历史库与评分</a><a href="#suites">其他评测系列</a><a href="README.md">环境与复现</a></nav>
+<section id="poly"><h2>PolyCodeEval 的五个项目</h2>
+<p>每题提供需求文档、工程骨架、可读参考和可写文件清单。同一项目的 L1、L2 使用相同的外部行为验收，区别在于需要补全哪些模块。下列题号可以直接传给 <code>bench:poly -- --task</code>。<a href="src/polycodeeval/cases.ts">查看题目定义</a></p>
+      <article>
+        <header><h3>Logistics · 物流管理</h3><span>C++ · 54 项黑盒用例</span></header>
+        <p>实现一个交互式物流系统。用户可以注册、充值、寄件和签收，重启后还能查到原有的账户和运单。</p>
+        <dl><dt>L1</dt><dd>补全账户、快件、物流服务和命令行四个模块。<code>poly-cpp-logistics-l1</code></dd>
+          <dt>L2</dt><dd>补全快件实体和物流服务，接入已有账户类与命令行。<code>poly-cpp-logistics-l2</code></dd>
+          <dt>验收</dt><dd>寄件扣费、运单编号、签收状态、按角色查询，以及终端输出的数值格式。</dd></dl>
+      </article>
+      <article>
+        <header><h3>IDCenter · 分布式 ID</h3><span>Java · 53 项黑盒用例</span></header>
+        <p>为命令行工具提供两类 ID 生成器和 Base62 编解码，使调用方能生成 ID、还原编码并读取时间信息。</p>
+        <dl><dt>L1</dt><dd>补全 Base62、IdWorker、SidWorker 和 CLI。<code>poly-java-idcenter-l1</code></dd>
+          <dt>L2</dt><dd>实现 Base62 与 Snowflake IdWorker，接入已有 SidWorker 和 CLI。<code>poly-java-idcenter-l2</code></dd>
+          <dt>验收</dt><dd>编码往返、连续生成 ID 的顺序、时间戳解析、SID 长度和 CLI 行为。</dd></dl>
+      </article>
+      <article>
+        <header><h3>zxcvbn · 密码强度估计</h3><span>Python · 41 项黑盒用例</span></header>
+        <p>给定密码和用户输入，识别词典词、重复、序列和日期等模式，估算猜测次数，并返回强度分数、破解时间和改进建议。</p>
+        <dl><dt>L1</dt><dd>补全 scoring、matching、time_estimates 和 feedback。当前模块顺序先实现评分，再实现会调用评分器的匹配逻辑。<code>poly-py-zxcvbn-l1</code></dd>
+          <dt>L2</dt><dd>基于已有匹配和评分结果，实现破解时间估算与反馈。<code>poly-py-zxcvbn-l2</code></dd>
+          <dt>验收</dt><dd>弱密码与强密码评分、用户输入匹配、不同猜测速率的时间估算，以及日期等模式的反馈。</dd></dl>
+      </article>
+      <article>
+        <header><h3>EJS · 模板引擎</h3><span>JavaScript · 119 项黑盒用例</span></header>
+        <p>实现 CommonJS 模板编译器，让程序和命令行都能把模板与输入数据渲染成文本。</p>
+        <dl><dt>L1</dt><dd>补全工具函数、编译与渲染引擎、CLI。<code>poly-js-ejs-l1</code></dd>
+          <dt>L2</dt><dd>补全工具函数和渲染引擎，通过已有 CLI 调用。<code>poly-js-ejs-l2</code></dd>
+          <dt>验收</dt><dd>XML 转义、自定义分隔符、嵌套模板的相对路径、命令行参数与文件输入。</dd></dl>
+      </article>
+      <article>
+        <header><h3>gobreaker · 熔断器</h3><span>Go · 45 项黑盒用例</span></header>
+        <p>实现支持泛型的熔断器，统计滚动窗口内的请求结果，驱动状态转换，并支持两阶段调用和跨实例共享状态。</p>
+        <dl><dt>L1</dt><dd>补全滚动计数器、核心熔断器、两阶段接口和分布式熔断器。<code>poly-go-gobreaker-l1</code></dd>
+          <dt>L2</dt><dd>补全滚动计数器和分布式熔断器，与已有的核心及两阶段实现集成。<code>poly-go-gobreaker-l2</code></dd>
+          <dt>验收</dt><dd>时间桶轮转与快进、成功和失败计数、半开状态、两阶段回调及分布式状态同步。</dd></dl>
+      </article>
+</section>
+<section id="loc"><h2>Poly 逐题代码规模（LoC）</h2>
+<p>按 <code>poly-v4</code> 冻结输入统计物理行，含空行和注释。<strong>可写模块</strong>列展示允许修改的文件在初始骨架和完整参考实现中的行数。<strong>实际检索池</strong>列统计 SAG2 为该题实际建索引的参考源码，包括历史库、跨语言参考和本项目的只读参考。<a href="results/poly-v4.md">冻结输入与索引记录</a></p>
+<div class="loc-scroll" role="region" aria-label="各题代码规模表" tabindex="0">
+<table aria-label="PolyCodeEval 十道题的物理行数">
+  <thead><tr><th scope="col">项目</th><th scope="col">粒度</th><th scope="col">起始源码总量<br>（含参考）</th><th scope="col">可写模块<br>骨架 → 完整实现</th><th scope="col">实际检索池<br>已索引源码</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">C++ Logistics</th><td>L1</td><td>128,609</td><td>159 → 522</td><td>128,450</td></tr>
+    <tr><th scope="row">C++ Logistics</th><td>L2</td><td>3,633</td><td>108 → 255</td><td>3,525</td></tr>
+    <tr><th scope="row">Java IDCenter</th><td>L1</td><td>128,451</td><td>214 → 330</td><td>128,237</td></tr>
+    <tr><th scope="row">Java IDCenter</th><td>L2</td><td>3,312</td><td>166 → 229</td><td>3,146</td></tr>
+    <tr><th scope="row">Python zxcvbn</th><td>L1</td><td>128,552</td><td>199 → 1,304</td><td>128,344</td></tr>
+    <tr><th scope="row">Python zxcvbn</th><td>L2</td><td>4,269</td><td>30 → 226</td><td>4,230</td></tr>
+    <tr><th scope="row">JavaScript EJS</th><td>L1</td><td>129,215</td><td>837 → 1,308</td><td>128,378</td></tr>
+    <tr><th scope="row">JavaScript EJS</th><td>L2</td><td>4,113</td><td>709 → 1,090</td><td>3,186</td></tr>
+    <tr><th scope="row">Go gobreaker</th><td>L1</td><td>129,181</td><td>408 → 875</td><td>128,773</td></tr>
+    <tr><th scope="row">Go gobreaker</th><td>L2</td><td>4,180</td><td>188 → 464</td><td>3,992</td></tr>
+  </tbody>
+</table>
+</div>
+</section>
+<section id="grading"><h2>历史库与评分</h2>
+<p>L1 的五道题共享 LuaJIT、go-yaml 和 diff-match-patch 三个完整仓库快照。SAG2 从中索引了 209 个源码文件，共 127,999 个物理行，包含注释、空行和上游测试。每题还提供本项目的只读文件和专门编写的跨语言参考。L2 使用较小的参考池，其中有 11 个背景文件。<a href="src/polycodeeval/assets/history.json">历史仓库版本</a></p>
+<p>整题通过要求完成 Git 交付并通过全部外部验收。用例通过率单独记录，能显示一次未完成交付已经实现了多少功能。对比方法包括单会话 rawagent、Codex CLI、按模块交付的 RECAST，以及加入历史代码检索的 SAG2-SQLite。</p>
+<p><strong>批次说明</strong>　<code>poly-v4</code> 收录 GPT-6 Luna 对五道 L1 题、四种方法的 20 次正式试验。当前工作区使用 <code>poly-v5</code>，调整了 Python 和 Go 的模块验收，待实现的后续模块可以留到整项目验收时检查。<a href="results/poly-v4.html">阅读 v4 正式报告</a> · <a href="src/polycodeeval/verify-module-acceptance.test.ts">查看 v5 回归用例</a></p>
+</section>
+<section id="suites"><h2>仓库中的其他评测系列</h2>
+<ul>
+<li><strong>S01–S10 · 检索与开发速度。</strong>十个构造场景覆盖支付校验、上传解析、订单封存、附件隔离、行情路由、索赔发件箱、维保计价、跨仓组件组合、多模块订单交付和大规模干扰检索。记录必需模块是否召回，以及交付骨架的用时。<a href="results/report.html">场景与结果</a></li>
+<li><strong>B01–B09 · 索引规模。</strong>从单语言小仓逐步扩大到 Camel 和多仓组合，比较全量建库、增量更新与冷暖查询。<a href="src/index-build/materialize.py">九组语料定义</a></li>
+<li><strong>project-delivery · 小型 JavaScript 工程。</strong>三道题分别实现订单批量入账与审计、租户索赔扣款与原子发件箱、带租约和重试调度的作业队列。<a href="results/project-e2e-project-delivery.md">题目与交付结果</a></li>
+<li><strong>real-v2 · 万行级多语言工程。</strong>三个任务分别交付 Django 国际化目录、coverage.py 的 HTML 执行上下文浏览器、BullMQ 优先级队列功能。<a href="results/real-e2e-real-v2.html">题目与交付结果</a></li>
+<li><strong>large-v3 · 十万行级 Django 工程。</strong>在同一个 Django 仓库分别实现管理后台关联字段自动补全、slug 预填、设置或禁用密码，联动验证 Python 后端与 JavaScript 前端。<a href="results/large-v3.html">题目与交付结果</a></li>
+</ul></section>
+</main></body>
+</html>

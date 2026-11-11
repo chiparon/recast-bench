@@ -311,12 +311,15 @@ function handlePython(modeName) {
       .filter((f) => f.endsWith(".py"))
       .map((f) => join(pkgDir, f));
 
-    if (modeName === "compile") {
+    const unit = modeName.replace(/^compile-/, "");
+    const unitCheck = Object.hasOwn(PY_CHECK_FILES, unit);
+    if (modeName === "compile" || (unitCheck && modeName === "compile-" + unit)) {
       const script = "import sys\nfor p in sys.argv[1:]:\n  compile(open(p, 'rb').read(), p, 'exec')\n";
-      const c = runProc(PYTHON, ["-I", "-B", "-c", script, ...pyFiles], { cwd: tmp });
+      const sources = unitCheck ? [join(pkgDir, unit + ".py")] : pyFiles;
+      const c = runProc(PYTHON, ["-I", "-B", "-c", script, ...sources], { cwd: tmp });
       if (!c.ok) {
         console.error(c.output);
-        process.exit(1);
+        process.exitCode = 1;
       }
       return;
     }
@@ -327,6 +330,35 @@ function handlePython(modeName) {
     mkdirSync(junitDir, { recursive: true });
     const runnerCode =
       "import sys; sys.path[:0] = [sys.argv[1], sys.argv[2]]; import pytest; raise SystemExit(pytest.main(sys.argv[3:]))";
+    if (unitCheck) {
+      // The public package initializer imports every stage. Exercise this stage with
+      // its real workspace dependencies before assembling the public package.
+      const deps = {
+        scoring: ["adjacency_graphs"],
+        matching: ["frequency_lists", "adjacency_graphs", "scoring"],
+        time_estimates: [],
+        feedback: ["scoring", "adjacency_graphs"],
+      };
+      const isolated = join(tmp, "zxcvbn");
+      mkdirSync(isolated);
+      writeFileSync(join(isolated, "__init__.py"), "");
+      for (const name of [unit, ...deps[unit]]) {
+        cpSync(join(pkgDir, name + ".py"), join(isolated, name + ".py"));
+      }
+      const upstreamTests = join(ds, "tests/unit_tests");
+      const contractTests = join(__dirname, "zxcvbn_module_test.py");
+      const tests = {
+        scoring: [contractTests + "::test_scoring"],
+        matching: [join(upstreamTests, "matching_test.py")],
+        time_estimates: [join(upstreamTests, "time_estimates_test.py"), contractTests + "::test_time_estimates"],
+        feedback: [contractTests + "::test_feedback"],
+      };
+      const r = runProc(PYTHON, ["-I", "-B", "-c", runnerCode, tmp, PYTEST_SITE,
+        "-q", "--tb=short", "-o", `cache_dir=${cacheDir}`, ...tests[unit]], { cwd: tmp });
+      console.log(r.output);
+      process.exitCode = r.ok ? 0 : 1;
+      return;
+    }
     const runOne = (id) => {
       const files = PY_CHECK_FILES[id].map((f) => join(ds, "blackbox_tests", f));
       const r = runProc(
@@ -365,7 +397,8 @@ function handlePython(modeName) {
       const res = runOne(id);
       if (!res.passed) {
         console.error(`[FAIL ${id}] ${res.error || ""}`);
-        process.exit(1);
+        process.exitCode = 1;
+        return;
       }
     }
     console.log(`PASS (${targets.join(", ")})`);
@@ -598,10 +631,6 @@ func Panics(t *testing.T, fn func(), _ ...any) bool {
 function handleGo(modeName) {
   return withTempDir("poly-go-", (tmp) => {
     const ds = join(DATASETS_ROOT, "go/gobreaker");
-    cpSync(workspaceRoot, tmp, { recursive: true });
-    // Remove bench_checks and refs so only v2 package is tested cleanly
-    rmSync(join(tmp, "bench_checks"), { recursive: true, force: true });
-    rmSync(join(tmp, "refs"), { recursive: true, force: true });
 
     // Set up offline local testify/assert stub in tmp/_testify
     const testifyDir = join(tmp, "_testify/assert");
@@ -610,6 +639,7 @@ function handleGo(modeName) {
     writeFileSync(join(testifyDir, "assert.go"), GO_ASSERT_STUB, "utf8");
 
     const v2Dir = join(tmp, "v2");
+    cpSync(join(workspaceRoot, "v2"), v2Dir, { recursive: true });
     writeFileSync(
       join(v2Dir, "go.mod"),
       [
@@ -638,7 +668,7 @@ function handleGo(modeName) {
       const c = runProc(GO_BIN, ["build", "."], { cwd: v2Dir, env: goEnv });
       if (!c.ok) {
         console.error(c.output);
-        process.exit(1);
+        process.exitCode = 1;
       }
       return;
     }
@@ -676,6 +706,14 @@ function handleGo(modeName) {
       },
     };
 
+    if (modeName.startsWith("compile-")) {
+      const cfg = checkConfigs[modeName.slice("compile-".length)];
+      const c = runProc(GO_BIN, ["build", ...cfg.sources], { cwd: v2Dir, env: goEnv });
+      if (!c.ok) console.error(c.output);
+      process.exitCode = c.ok ? 0 : 1;
+      return;
+    }
+
     const allChecks = ["counter", "breaker", "twostep", "distributed"];
     const runOne = (id) => {
       const targetDir = join(tmp, "target_" + id);
@@ -697,15 +735,10 @@ function handleGo(modeName) {
 
       const cfg = checkConfigs[id];
       for (const s of cfg.sources) {
-        const srcPath = join(v2Dir, s);
-        if (existsSync(srcPath)) {
-          cpSync(srcPath, join(targetDir, s));
-        }
+        cpSync(join(v2Dir, s), join(targetDir, s));
       }
       for (const t of cfg.tests) {
-        if (existsSync(t)) {
-          cpSync(t, join(targetDir, basename(t)));
-        }
+        cpSync(t, join(targetDir, basename(t)));
       }
 
       const testArgs = ["test", "-json", "-count=1"];
@@ -730,7 +763,8 @@ function handleGo(modeName) {
       const res = runOne(id);
       if (!res.passed) {
         console.error(`[FAIL ${id}] ${res.error || ""}`);
-        process.exit(1);
+        process.exitCode = 1;
+        return;
       }
     }
     console.log(`PASS (${targets.join(", ")})`);

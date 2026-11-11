@@ -24,6 +24,7 @@ export interface RealFixture {
   }[];
   references: string[];
   compile: Command;
+  moduleCompiles?: Record<string, Command>;
   test: Command;
   moduleTests?: Record<string, Command>;
   prepare(root: string, variant: "starter" | "golden"): Promise<void>;

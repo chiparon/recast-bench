@@ -76,6 +76,7 @@ function polyFixture(opts: {
     timeoutMs: 120_000,
   });
   const crossRefs = crossLanguageTruthRefs[opts.id] ?? [];
+  const scopedCompile = opts.id.startsWith("poly-py-") || opts.id.startsWith("poly-go-");
   return {
     id: opts.id,
     title: opts.title,
@@ -88,6 +89,9 @@ function polyFixture(opts: {
       opts.modules.map((m) => `- ${m.path}: ${m.description}`).join("\n") +
       "\n\nConsult SPEC.md for the complete PolyCodeEval Product Requirements Document (PRD), and inspect the local project headers/modules as well as the cross-language reference implementations under refs/ for shared algorithms, data structures, and wire formats. Only the listed writable modules may be modified.",
     compile: command("compile"),
+    ...(scopedCompile && {
+      moduleCompiles: Object.fromEntries(opts.modules.map((m) => [m.name, command("compile-" + m.name)])),
+    }),
     test: command("all"),
     moduleTests: Object.fromEntries(
       opts.modules.map((m) => [m.name, command(m.name)]),
@@ -328,19 +332,19 @@ export const fixtures: RealFixture[] = [
       "Implement the complete 4-stage zxcvbn password strength analysis pipeline (omnimatch pattern detection, minimum-guess DP scoring, attack time estimation, and user feedback generation) according to SPEC.md.",
     modules: [
       {
-        name: "matching",
-        path: "zxcvbn/matching.py",
-        language: "Python",
-        description:
-          "Implement omnimatch and all pattern matchers (dictionary, reverse_dictionary, l33t, spatial, repeat, sequence, regex, date) using adjacency_graphs and frequency_lists.",
-      },
-      {
         name: "scoring",
         path: "zxcvbn/scoring.py",
         language: "Python",
-        dependsOn: ["matching"],
         description:
           "Implement most_guessable_match_sequence dynamic programming search and pattern guess estimators (dictionary, uppercase, l33t, spatial, repeat, sequence, regex, date, bruteforce).",
+      },
+      {
+        name: "matching",
+        path: "zxcvbn/matching.py",
+        language: "Python",
+        dependsOn: ["scoring"],
+        description:
+          "Implement omnimatch and all pattern matchers (dictionary, reverse_dictionary, l33t, spatial, repeat, sequence, regex, date) using adjacency_graphs and frequency_lists.",
       },
       {
         name: "time_estimates",

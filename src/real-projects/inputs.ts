@@ -58,6 +58,7 @@ export function publicTask(f: RealFixture, m: Manifest) {
     readFiles,
     referenceFiles,
     compileCommand: f.compile,
+    ...(f.moduleCompiles && { moduleCompileCommands: f.moduleCompiles }),
     testCommand: f.test,
     moduleTestCommands: f.moduleTests,
   };
