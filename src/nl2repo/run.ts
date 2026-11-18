@@ -10,20 +10,22 @@ import { preflightCodex } from "./preflight.ts";
 
 const { values } = parseArgs({ options: {
   batch: { type: "string" }, project: { type: "string" }, model: { type: "string" },
-  tokens: { type: "string", default: "160000" }, seconds: { type: "string", default: "3600" },
+  tokens: { type: "string" }, seconds: { type: "string" },
   repeats: { type: "string", default: "1" }, plan: { type: "boolean" },
 } });
 assert(values.batch && /^[\w-]+$/.test(values.batch), "Supply --batch NAME");
 assert(PROJECT_MODELS.includes(values.model as any), "Supply --model " + PROJECT_MODELS.join("|"));
-const tokens = Number(values.tokens), seconds = Number(values.seconds), repeats = Number(values.repeats);
-assert([tokens, seconds, repeats].every(n => Number.isSafeInteger(n) && n > 0), "Budgets/repeats must be positive integers");
+const tokens = values.tokens === undefined ? null : Number(values.tokens);
+const seconds = values.seconds === undefined ? null : Number(values.seconds);
+const repeats = Number(values.repeats);
+assert([tokens, seconds, repeats].every(n => n === null || (Number.isSafeInteger(n) && n > 0)), "Explicit budgets/repeats must be positive integers");
 const projects = ["sqlparse", "rich-click", "deepdiff", "boltons", "jinja"].filter(p => !values.project || p === values.project);
 assert(projects.length, "Unknown project");
 const root = resolve("results/nl2repo", values.batch);
 const protocol = {
   version: "nl2repo-declaration-v1", model: values.model, effort: "low", tokens, seconds, repeats, projects,
   methods: ["recast", "codex"], references: "empty", score: "fixed-baseline-pass-rate; macro-average-per-project",
-  ...productIdentity(), implementationHash: await implementationHash(), responseOutputCap: 8192,
+  ...productIdentity(), implementationHash: await implementationHash(), responseOutputCap: tokens === null ? null : 8192,
   inputs: {} as Record<string, { hash: string; controlHash: string | null; ready: boolean }>,
 };
 for (const project of projects) {

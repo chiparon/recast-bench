@@ -39,14 +39,14 @@ const task: MethodTask = {
 await mkdir("work/nl2repo/trials", { recursive: true });
 const work = await mkdtemp(resolve("work/nl2repo/trials", project + "-" + method + "-"));
 const controller = new AbortController();
-const timer = setTimeout(() => controller.abort(Error("Shared wall-time budget exhausted")), protocol.seconds * 1000);
+const timer = protocol.seconds === null ? undefined : setTimeout(() => controller.abort(Error("Shared wall-time budget exhausted")), protocol.seconds * 1000);
 const calls: MeterCall[] = [];
 let used = 0;
 const onCall = (call: MeterCall) => {
   calls.push(call);
   appendFileSync(join(work, "calls.ndjson"), JSON.stringify(call) + "\n");
   used += call.usage?.totalTokens ?? 0;
-  if (used >= protocol.tokens) controller.abort(Error("Shared reported-token budget exhausted"));
+  if (protocol.tokens !== null && used >= protocol.tokens) controller.abort(Error("Shared reported-token budget exhausted"));
 };
 // Both harnesses get the same response cap and stop threshold. The last request's
 // input can overshoot the cumulative threshold; record actual usage, never trim it.
@@ -56,7 +56,8 @@ globalThis.fetch = async (input, init) => {
   if (/^https:\/\/(api\.openai\.com\/v1|api\.deepseek\.com)\/responses$/.test(url) && typeof init?.body === "string") {
     controller.signal.throwIfAborted();
     const body = JSON.parse(init.body);
-    body.max_output_tokens = Math.max(16, Math.min(protocol.responseOutputCap, protocol.tokens - used));
+    if (protocol.responseOutputCap === null) delete body.max_output_tokens;
+    else body.max_output_tokens = Math.max(16, Math.min(protocol.responseOutputCap, protocol.tokens - used));
     init = { ...init, body: JSON.stringify(body), signal: AbortSignal.any([controller.signal, ...(init.signal ? [init.signal] : [])]) };
   }
   return originalFetch(input, init);

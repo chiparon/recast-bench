@@ -74,8 +74,10 @@ def build_report(batch=None):
                                  for p in protocol["projects"]]
                 averages[method] = macro_average(project_means)
             text += ["", "Macro average: " + ", ".join(f"{m}={v:.2%}" for m, v in averages.items())]
+            token_policy = "unlimited" if protocol["tokens"] is None else f'{protocol["tokens"]:,}'
+            time_policy = "unlimited" if protocol["seconds"] is None else f'{protocol["seconds"]:,} seconds'
             overview = ["# NL2Repo paired results: " + batch, "",
-                f'Model: **{protocol["model"]}**, effort `{protocol["effort"]}`. Each method receives the same input and a **{protocol["tokens"]:,} reported-token stop threshold / {protocol["seconds"]:,} second execution budget** per project. Repetitions per method: {protocol["repeats"]}.', "",
+                f'Model **{protocol["model"]}**, effort `{protocol["effort"]}`. Project token budget **{token_policy}**. Project time budget **{time_policy}**. Repetitions per method {protocol["repeats"]}.', "",
                 "| Project | RECAST test pass rate | Codex test pass rate |", "|---|---:|---:|"]
             for p in protocol["projects"]:
                 cells = []
@@ -88,8 +90,8 @@ def build_report(batch=None):
             budget_stops = sum(bool(r.get("budgetStop")) for r in rows)
             full = {m: sum(r["score"]["allPassed"] for r in rows if r["method"] == m) for m in protocol["methods"]}
             overview += ["", f'{budget_stops}/{len(rows)} trials stopped at the configured budget. Fully passing deliveries: ' + ", ".join(f"{m}={v}/{len(protocol['projects']) * protocol['repeats']}" for m, v in full.items()) + ".",
-                "", "The threshold is checked after a provider response, so the final request can exceed it. Actual reported usage appears below; all usage records in this batch retain their completeness flag. Original harness cancellation messages are preserved in JSON, while the displayed stop reason comes from the benchmark budget controller.",
-                "", "These are one-budget, limited-sample results for the declaration-skeleton setup, with an empty reference corpus and per-file RECAST scheduling without supplied dependency edges. Most runs retain import/collection failures. They do not establish a general model or harness ranking.",
+                "", "Token counts below are provider-reported usage, including input and output.",
+                "", "The declaration-skeleton setup uses an empty reference corpus and per-file RECAST scheduling without supplied dependency edges.",
                 "", "## Inputs and controls", ""]
             text = overview + text[2:]
         else:

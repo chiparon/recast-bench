@@ -34,7 +34,7 @@ DeepDiff 需求中的 `deepdiff==8.5.0 (core library)` 自依赖已删除，修�
 
 ## 配对协议与判分
 
-- 模型必须用 `--model` 明确指定，两组推理等级均为 `low`。默认每项目、每方法 160,000 个供应商报告 Token、3,600 秒执行预算，单响应输出上限 8,192。Token 阈值在响应返回后检查，最后一次请求的输入可能造成超额，记录实际用量；不会截断账目。
+- 模型用 `--model` 指定，两组推理等级均为 `low`。默认由各自运行器自然结束，累计 Token、单次响应输出和项目总时长均无实验上限。显式传入 `--tokens N` 时按供应商报告的累计用量停止，并设置 8,192 个 Token 的单响应上限。传入 `--seconds N` 可单独指定项目时限。两组始终记录实际用量。
 - 每个项目在两组都运行一次，默认共 10 次；`--repeats` 增加独立重复。同一项目串行配对，按项目和重复编号交替方法顺序。不同模型使用不同批次名。
 - 原实现和空骨架先经过相同打包、依赖和测试命令。正式测试使用独立 Linux 容器，禁用网络、限制资源，只提供提交内容与评分器。公开检查使用另一份容器执行，里面没有私有回归测试和原实现。
 - 基线必须正常结束且所有非跳过、非预期失败测试通过。冻结有效 node ID 后，生成项目的导入失败、收集失败、漏跑、运行中跳过以及超时均不能缩小分母。setup 或 teardown 失败的用例也不算通过。原基线排除的用例单独列出。
@@ -53,13 +53,13 @@ npm run prepare:nl2repo
 npm run test:nl2repo
 
 # 不调用模型、不产生推理费用的配对计划
-npm run bench:nl2repo -- --plan --batch nl2repo-v1 --model gpt-6-luna
+npm run bench:nl2repo -- --plan --batch sqlparse-unlimited-v2 --project sqlparse --model gpt-6-luna
 
 # 先验证原实现和骨架
 npm run controls:nl2repo
 
 # 先跑 sqlparse 配对；凭据从已有 bench 配置读取，不复制进选手工作区
-node --env-file=../recast-bench/.env.local launch.mjs src/nl2repo/run.ts --batch nl2repo-sqlparse-v1 --project sqlparse --model gpt-6-luna --tokens 160000 --seconds 3600
+node --env-file=../recast-bench/.env.local launch.mjs src/nl2repo/run.ts --batch sqlparse-unlimited-v2 --project sqlparse --model gpt-6-luna
 
 # 五项目配对
 node --env-file=../recast-bench/.env.local launch.mjs src/nl2repo/run.ts --batch nl2repo-v1 --model gpt-6-luna --tokens 160000 --seconds 3600
