@@ -3,6 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prepare:nl2repo": "node launch.mjs src/nl2repo/cli.mjs prepare",
+    "controls:nl2repo": "node launch.mjs src/nl2repo/cli.mjs controls",
+    "bench:nl2repo": "node launch.mjs src/nl2repo/run.ts",
+    "report:nl2repo": "node launch.mjs src/nl2repo/cli.mjs report",
+    "test:nl2repo": "node launch.mjs src/nl2repo/cli.mjs test",
     "prepare:asset-pilot": "node launch.mjs scripts/prepare-asset-pilot.ts",
     "bench:asset-pilot": "node launch.mjs src/asset-pilot/run.ts",
     "report:asset-pilot": "node launch.mjs src/asset-pilot/report.ts",

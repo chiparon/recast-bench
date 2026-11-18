@@ -1,0 +1,123 @@
+{
+  "nl2repo": {
+    "repository": "https://github.com/multimodal-art-projection/NL2RepoBench",
+    "commit": "781a1da1ee41fb8edb0bed22f586d69111610edf"
+  },
+  "projects": {
+    "sqlparse": {
+      "source_layer": 12,
+      "source_prefix": "sqlparse",
+      "package": "sqlparse",
+      "count": 461,
+      "image": "ghcr.io/multimodal-art-projection/nl2repobench/sqlparse@sha256:fdc248879569aa72db0c14a15cafb5a57436879a530726d313de83b3c6061138",
+      "manifest": "sha256:fdc248879569aa72db0c14a15cafb5a57436879a530726d313de83b3c6061138",
+      "source_blob": {
+        "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+        "size": 127016,
+        "digest": "sha256:1443504df2f9f31c4f6ce2ee3deca0aa8e472026302ac825c8943ebf6acf411b"
+      },
+      "python_env": [
+        "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "LANG=C.UTF-8",
+        "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+        "PYTHON_VERSION=3.10.11",
+        "PYTHON_PIP_VERSION=23.0.1",
+        "PYTHON_SETUPTOOLS_VERSION=65.5.1",
+        "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/0d8570dc44796f4369b652222cf176b3db6ac70e/public/get-pip.py",
+        "PYTHON_GET_PIP_SHA256=96461deced5c2a487ddc65207ec5a9cffeca0d34e7af7ea1afc470ff0d746207"
+      ],
+      "image_workdir": "/workspace"
+    },
+    "rich-click": {
+      "source_layer": 9,
+      "source_prefix": "project",
+      "package": "src/rich_click",
+      "count": 145,
+      "image": "ghcr.io/multimodal-art-projection/nl2repobench/rich-click@sha256:8f091fb134fce469a442c928a3a8494510e3ff68c7e88b2c1378aff8c813d241",
+      "manifest": "sha256:8f091fb134fce469a442c928a3a8494510e3ff68c7e88b2c1378aff8c813d241",
+      "source_blob": {
+        "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+        "size": 28406470,
+        "digest": "sha256:a3e0c76fc0404613e3764de00ee278e2b67ed691a74d4824f3e2ecdc3d117627"
+      },
+      "python_env": [
+        "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+        "PYTHON_VERSION=3.13.5",
+        "PYTHON_SHA256=93e583f243454e6e9e4588ca2c2662206ad961659863277afcdb96801647d640"
+      ],
+      "image_workdir": "/workspace"
+    },
+    "deepdiff": {
+      "source_layer": 12,
+      "source_prefix": "deepdiff",
+      "package": "deepdiff",
+      "count": 970,
+      "image": "ghcr.io/multimodal-art-projection/nl2repobench/deepdiff@sha256:e643e3d13892f4bd3494eec93faa93799b259e38bdae44f4d3f39794d3c65173",
+      "manifest": "sha256:e643e3d13892f4bd3494eec93faa93799b259e38bdae44f4d3f39794d3c65173",
+      "source_blob": {
+        "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+        "size": 824186,
+        "digest": "sha256:9a5a5685dddf2dd2cb22b96a3cd633a30e66114213520e8e0e8fb90bc6c75aba"
+      },
+      "python_env": [
+        "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "LANG=C.UTF-8",
+        "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+        "PYTHON_VERSION=3.10.11",
+        "PYTHON_PIP_VERSION=23.0.1",
+        "PYTHON_SETUPTOOLS_VERSION=65.5.1",
+        "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/0d8570dc44796f4369b652222cf176b3db6ac70e/public/get-pip.py",
+        "PYTHON_GET_PIP_SHA256=96461deced5c2a487ddc65207ec5a9cffeca0d34e7af7ea1afc470ff0d746207"
+      ],
+      "image_workdir": "/workspace"
+    },
+    "boltons": {
+      "source_layer": 13,
+      "source_prefix": "boltons",
+      "package": "boltons",
+      "count": 423,
+      "image": "ghcr.io/multimodal-art-projection/nl2repobench/boltons@sha256:770deb94e716b3a1592900ab389ac628f7b2a41d360e55bdb633bbff4c948e52",
+      "manifest": "sha256:770deb94e716b3a1592900ab389ac628f7b2a41d360e55bdb633bbff4c948e52",
+      "source_blob": {
+        "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+        "size": 715688,
+        "digest": "sha256:5d3f737f3c5f449cc2de12ee8cf68f4a057b799ef4068ed24057079ee1b2031c"
+      },
+      "python_env": [
+        "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "LANG=C.UTF-8",
+        "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+        "PYTHON_VERSION=3.12.4",
+        "PYTHON_PIP_VERSION=24.0",
+        "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/66d8a0f637083e2c3ddffc0cb1e65ce126afb856/public/get-pip.py",
+        "PYTHON_GET_PIP_SHA256=6fb7b781206356f45ad79efbb19322caa6c2a5ad39092d0d44d0fec94117e118"
+      ],
+      "image_workdir": "/workspace"
+    },
+    "jinja": {
+      "source_layer": 8,
+      "source_prefix": "jinja",
+      "package": "src/jinja2",
+      "count": 911,
+      "image": "ghcr.io/multimodal-art-projection/nl2repobench/jinja@sha256:4143726f46dd7cd8a24f9894d665b4f4fbc7233787713fb5696810a60a8efe8c",
+      "manifest": "sha256:4143726f46dd7cd8a24f9894d665b4f4fbc7233787713fb5696810a60a8efe8c",
+      "source_blob": {
+        "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+        "size": 294137,
+        "digest": "sha256:689d7b7e1e645677289b6303379755904020c1682446d8cdf28bc1e94de9e6cb"
+      },
+      "python_env": [
+        "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "LANG=C.UTF-8",
+        "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+        "PYTHON_VERSION=3.10.1",
+        "PYTHON_PIP_VERSION=21.2.4",
+        "PYTHON_SETUPTOOLS_VERSION=57.5.0",
+        "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/3cb8888cc2869620f57d5d2da64da38f516078c7/public/get-pip.py",
+        "PYTHON_GET_PIP_SHA256=c518250e91a70d7b20cceb15272209a4ded2a0c263ae5776f129e0d9b5674309"
+      ],
+      "image_workdir": "/jinja"
+    }
+  }
+}

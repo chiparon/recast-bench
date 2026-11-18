@@ -1,0 +1,155 @@
+{
+  "kind": "input-and-control-readiness",
+  "projects": [
+    {
+      "project": "sqlparse",
+      "sourceLines": 4023,
+      "files": 21,
+      "officialTestCount": 461,
+      "inputHash": "a41fcb9e072bf8a03676294ddc06f939993c3e3d1f23e5e28853e82e21e8b6f8",
+      "status": "ready",
+      "backend": "docker",
+      "collected": 464,
+      "baselinePassed": 461,
+      "baselineError": null,
+      "originalScore": {
+        "passed": 461,
+        "total": 461,
+        "rate": 1.0,
+        "missing": 0,
+        "collectionErrors": 0,
+        "unexpected": 0,
+        "allPassed": true
+      },
+      "skeletonScore": {
+        "passed": 1,
+        "total": 461,
+        "rate": 0.0021691973969631237,
+        "missing": 339,
+        "collectionErrors": 5,
+        "unexpected": 0,
+        "allPassed": false
+      }
+    },
+    {
+      "project": "rich-click",
+      "sourceLines": 6785,
+      "files": 20,
+      "officialTestCount": 145,
+      "inputHash": "f7c8765f17c94c62f8f20af9138abf20c051e755e712ab6032b6aebca4841ef7",
+      "status": "ready",
+      "backend": "docker",
+      "collected": 143,
+      "baselinePassed": 139,
+      "baselineError": null,
+      "originalScore": {
+        "passed": 139,
+        "total": 139,
+        "rate": 1.0,
+        "missing": 0,
+        "collectionErrors": 0,
+        "unexpected": 0,
+        "allPassed": true
+      },
+      "skeletonScore": {
+        "passed": 4,
+        "total": 139,
+        "rate": 0.02877697841726619,
+        "missing": 97,
+        "collectionErrors": 24,
+        "unexpected": 0,
+        "allPassed": false
+      }
+    },
+    {
+      "project": "deepdiff",
+      "sourceLines": 8127,
+      "files": 16,
+      "officialTestCount": 970,
+      "inputHash": "6997bdde19d9fb0436a52261ad4399dae4f0a752068adae1daed36aa5c111715",
+      "status": "ready",
+      "backend": "docker",
+      "collected": 980,
+      "baselinePassed": 970,
+      "baselineError": null,
+      "originalScore": {
+        "passed": 970,
+        "total": 970,
+        "rate": 1.0,
+        "missing": 0,
+        "collectionErrors": 0,
+        "unexpected": 0,
+        "allPassed": true
+      },
+      "skeletonScore": {
+        "passed": 0,
+        "total": 970,
+        "rate": 0.0,
+        "missing": 590,
+        "collectionErrors": 7,
+        "unexpected": 0,
+        "allPassed": false
+      }
+    },
+    {
+      "project": "boltons",
+      "sourceLines": 17005,
+      "files": 30,
+      "officialTestCount": 423,
+      "inputHash": "cc9c045945f38cb90695e4d6a739325d2e9e7874cc9136031bff18e4a0951dfa",
+      "status": "ready",
+      "backend": "docker",
+      "collected": 423,
+      "baselinePassed": 423,
+      "baselineError": null,
+      "originalScore": {
+        "passed": 423,
+        "total": 423,
+        "rate": 1.0,
+        "missing": 0,
+        "collectionErrors": 0,
+        "unexpected": 0,
+        "allPassed": true
+      },
+      "skeletonScore": {
+        "passed": 2,
+        "total": 423,
+        "rate": 0.004728132387706856,
+        "missing": 146,
+        "collectionErrors": 18,
+        "unexpected": 0,
+        "allPassed": false
+      }
+    },
+    {
+      "project": "jinja",
+      "sourceLines": 14351,
+      "files": 25,
+      "officialTestCount": 911,
+      "inputHash": "833a9480a2f70a2c0502d280133468bccb4a23074a5e0a76ef6f023863e9e6ad",
+      "status": "ready",
+      "backend": "docker",
+      "collected": 911,
+      "baselinePassed": 911,
+      "baselineError": null,
+      "originalScore": {
+        "passed": 911,
+        "total": 911,
+        "rate": 1.0,
+        "missing": 0,
+        "collectionErrors": 0,
+        "unexpected": 0,
+        "allPassed": true
+      },
+      "skeletonScore": {
+        "passed": 0,
+        "total": 911,
+        "rate": 0.0,
+        "missing": 911,
+        "collectionErrors": 0,
+        "unexpected": 0,
+        "allPassed": false
+      }
+    }
+  ]
+}

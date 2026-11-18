@@ -1,0 +1,19 @@
+{
+  "model": "gpt-6-luna",
+  "project": "sqlparse",
+  "modelRequests": 0,
+  "runtime": {
+    "outputRoot": "E:\\Eproject\\recast-bench-nl2repo\\work\\nl2repo\\preflight\\cli-dNOQez\\project-pipelines\\18e8d68d-00b7-40b2-a7cc-950c24caf6dd\\project",
+    "baselineCommit": "57e7b04aff618588a75de05229b829288fe69d34",
+    "agent": {
+      "version": "codex-cli 0.169.0",
+      "threadId": "01a1eead-77c5-7510-9ce9-274f5098acaa",
+      "turnId": null,
+      "status": "preflight",
+      "events": [],
+      "error": null
+    },
+    "providerTools": [],
+    "suppressedNativeTools": []
+  }
+}

@@ -125,3 +125,6 @@ npm test
 | work/<batch> | 生成的历史源、骨架、独立 Git 输出仓和验收报告 |
 
 `npm run check:speedup` 单独评估任务板中的提速假设。它要求对两个基线的时间和轮数均达到比值 > 1 且配对单侧 p < 0.05；一项未达即返回非零。这个结果与编译和行为交付验收分别记录。
+# NL2Repo 骨架重建配对实验
+
+五个原项目的固定来源、声明骨架、统一输入及 RECAST / Codex 测试通过率流程见 [NL2REPO-BENCH.md](NL2REPO-BENCH.md)。[当前准备状态](results/nl2repo-readiness.md) · [公共题包](repro/nl2repo-v1-inputs.zip)

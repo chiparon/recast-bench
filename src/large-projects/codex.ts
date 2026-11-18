@@ -18,6 +18,10 @@ export interface CodexOptions {
   task: MethodTask;
   onCall: (record: MeterCall) => unknown;
   signal?: AbortSignal;
+  /** Optional persistent-cache parent for native CLI homes (outside system temp). */
+  homeRoot?: string;
+  /** Initialize a native thread without requesting a model turn or publishing. */
+  preflightOnly?: boolean;
 }
 
 function isolatedEnv(home: string, token: string) {
@@ -52,6 +56,7 @@ async function nativeTurn(
   proxy: Awaited<ReturnType<typeof openCodexProvider>>,
   bridge: ReturnType<typeof projectBridge>,
   signal: AbortSignal,
+  preflightOnly = false,
 ) {
   const binary =
     process.env.RECAST_CODEX_BIN ||
@@ -204,6 +209,8 @@ async function nativeTurn(
       developerInstructions:
         "Use the supplied project tools for all reads, edits and public checks. Only listed writable files may be changed. Finish by returning your final response.",
     });
+    if (preflightOnly) return { version, threadId: start.thread.id, turnId: null,
+      status: "preflight", events, error: null };
     await request("turn/start", {
       threadId: start.thread.id,
       effort: "low",
@@ -240,7 +247,8 @@ export async function runCodex(options: CodexOptions) {
     signal,
   );
   const bridge = projectBridge(options.task, snapshot.outputRoot, signal);
-  const isolated = await mkdtemp(join(tmpdir(), "recast-codex-")),
+  if (options.homeRoot) await mkdir(options.homeRoot, { recursive: true });
+  const isolated = await mkdtemp(join(options.homeRoot ?? tmpdir(), "recast-codex-")),
     home = join(isolated, "home"),
     cwd = join(isolated, "cwd");
   let commit: string | null = null,
@@ -251,7 +259,7 @@ export async function runCodex(options: CodexOptions) {
     await mkdir(cwd);
     const proxy = await openCodexProvider(model, onCall, signal);
     try {
-      const agent = await nativeTurn(model, home, cwd, proxy, bridge, signal);
+      const agent = await nativeTurn(model, home, cwd, proxy, bridge, signal, options.preflightOnly);
       runtime = {
         ...snapshot,
         agent,
@@ -259,7 +267,7 @@ export async function runCodex(options: CodexOptions) {
         suppressedNativeTools: [...proxy.suppressed],
       };
       if (agent.error) throw Error(agent.error);
-      commit = await bridge.publish();
+      if (!options.preflightOnly) commit = await bridge.publish();
     } finally {
       await proxy.close();
     }

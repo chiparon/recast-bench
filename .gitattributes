@@ -3,4 +3,7 @@ results/large-*.json text eol=lf
 src/project-bench/**/*.ts text eol=lf
 src/real-projects/** text eol=lf
 src/large-projects/** text eol=lf
+src/nl2repo/** text eol=lf
+results/nl2repo-*.json text eol=lf
+results/nl2repo-*.md text eol=lf
 src/real-projects/case-one/upstream-files.txt text eol=crlf

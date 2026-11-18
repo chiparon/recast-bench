@@ -1,0 +1,7 @@
+setuptools==80.9.0
+wheel==0.45.1
+pytest==8.4.0
+pytest-timeout==2.4.0
+MarkupSafe==3.0.2
+trio==0.30.0
+Babel==2.17.0
