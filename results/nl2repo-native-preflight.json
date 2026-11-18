@@ -1,13 +1,14 @@
 {
   "model": "gpt-6-luna",
+  "effort": "high",
   "project": "sqlparse",
   "modelRequests": 0,
   "runtime": {
-    "outputRoot": "E:\\Eproject\\recast-bench-nl2repo\\work\\nl2repo\\preflight\\cli-rs45iV\\project-pipelines\\7f4ea2df-3a80-47f7-99df-a2c684af213f\\project",
-    "baselineCommit": "32dc0ebd96e10af65024609408b1a345bae7ae07",
+    "outputRoot": "E:\\Eproject\\recast-bench-nl2repo\\work\\nl2repo\\preflight\\cli-Qy0yXj\\project-pipelines\\e8c21237-a134-4164-81a6-d0985c2c4432\\project",
+    "baselineCommit": "26d16c4a19b38ce1f2c959b97afc61ef36be34bb",
     "agent": {
       "version": "codex-cli 0.169.0",
-      "threadId": "01a1eed8-fba0-7850-8d32-0edc2e9ccd74",
+      "threadId": "01a1eee3-1e09-7ab1-9810-768633ae1c86",
       "turnId": null,
       "status": "preflight",
       "events": [],

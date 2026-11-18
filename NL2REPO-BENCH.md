@@ -4,6 +4,17 @@
 
 [首轮配对结果](results/nl2repo-nl2repo-v1.md) · [选手输入 ZIP](repro/nl2repo-v1-inputs.zip) · [准备状态与实测基线](results/nl2repo-readiness.md) · [输入清单](results/nl2repo-inputs.json) · [来源锁](src/nl2repo/upstream-lock.json)
 
+## sqlparse 推理等级对比
+
+两轮都使用 `gpt-6-luna`、同一份骨架和 461 个有效测试，累计 Token、响应输出和执行总时长均无实验上限。每种组合运行一次，`high` 运行在请求发出前逐次核对推理等级。[low 评分和用量](results/nl2repo-sqlparse-unlimited-v2.md) · [high 评分和用量](results/nl2repo-sqlparse-unlimited-high-v1.md)
+
+| 方法 | low | high | 多通过的用例 | 通过率变化 |
+|---|---:|---:|---:|---:|
+| RECAST | 0/461（0.00%） | 134/461（29.07%） | 134 | +29.07 个百分点 |
+| Codex | 85/461（18.44%） | 233/461（50.54%） | 148 | +32.10 个百分点 |
+
+在 `high` 下，两组回归测试均收集完整。RECAST 完成 21 个模块和集成修复并通过公开检查。Codex 自主结束会话，其产物在公开的关键词大写格式化检查中触发类型错误。high 生成耗时分别为 54 分 32 秒和 25 分 10 秒。RECAST 收到供应商用量的请求合计 10,282,250 Token，另有请求超时未返回用量。Codex 共用 15,506,123 Token。
+
 首轮使用 `gpt-6-luna`、每题每组 160,000 个已报告 Token 停止阈值，每方法每题采样一次。五项目等权平均通过率为 **RECAST 0.14% / Codex 2.20%**；10 次均因 Token 阈值终止，完整交付均为 0/5。这反映本轮预算、严格声明骨架、空历史库及逐文件调度条件下的表现。逐题结果、实际用量和生成代码见报告与证据归档。
 
 sqlparse 单题复跑取消了两组的累计 Token、单次响应输出和项目总时长上限。两组沿用首轮相同的模型、输入和 461 个有效测试。RECAST 完成 5 个模块后，在 grouping 模块报告其依赖的 sql 和 tokens 模块仍为只读骨架，流水线以失败结束，部分代码通过 0/461。Codex 自主结束会话，公开的双语句拆分检查失败，部分代码通过 85/461（18.44%）。两组实际用量分别为 760,889 和 2,029,857 Token。[sqlparse 复跑报告](results/nl2repo-sqlparse-unlimited-v2.md)
