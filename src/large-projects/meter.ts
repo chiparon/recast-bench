@@ -3,6 +3,7 @@ import { waitForProvider } from "./transport.ts";
 import {
   createProjectClient,
   type ProjectModel,
+  type ReasoningEffort,
   type ProviderCall,
   type TokenUsage,
 } from "../project-bench/providers.ts";
@@ -75,6 +76,7 @@ export const sumUsage = (calls: readonly MeterCall[]) => ({
 export function meterExisting(
   model: ProjectModel,
   onCall: (call: MeterCall) => void,
+  effort: ReasoningEffort = "low",
 ) {
   const nativeFetch = globalThis.fetch;
   type Observed = {
@@ -101,6 +103,7 @@ export function meterExisting(
     return response;
   };
   const client = createProjectClient(model, {
+    effort,
     uncapped: true,
     onCall: async (row) => {
       const observed = context.getStore()?.reply;

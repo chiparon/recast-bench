@@ -13,6 +13,7 @@ export const PROJECT_MODELS = [
   "deepseek-flash",
 ] as const;
 export type ProjectModel = (typeof PROJECT_MODELS)[number];
+export type ReasoningEffort = "low" | "high";
 export type ProjectClient = ReturnType<typeof createProjectClient>;
 export interface TokenUsage {
   inputTokens: number;
@@ -37,6 +38,7 @@ export interface ProviderCall {
   tools: string[];
 }
 interface ClientOptions {
+  effort?: ReasoningEffort;
   /** Omit bench-imposed task, turn and response caps for the real-project suite. */
   uncapped?: boolean;
   maxTurns?: number;
@@ -219,7 +221,7 @@ export function createProjectClient(
       model,
       input: inputItems(messages),
       store: false,
-      reasoning: { effort: "low" },
+      reasoning: { effort: options.effort ?? "low" },
       ...(options.uncapped ? {} : { max_output_tokens: Math.min(remaining, options.maxOutputTokens ?? 8192) }),
       tools: tools.map((t) => ({
         type: "function",

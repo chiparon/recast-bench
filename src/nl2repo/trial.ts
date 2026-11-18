@@ -51,11 +51,14 @@ const onCall = (call: MeterCall) => {
 // Both harnesses get the same response cap and stop threshold. The last request's
 // input can overshoot the cumulative threshold; record actual usage, never trim it.
 const originalFetch = globalThis.fetch;
+let verifiedGenerationRequests = 0;
 globalThis.fetch = async (input, init) => {
   const url = input instanceof Request ? input.url : String(input);
   if (/^https:\/\/(api\.openai\.com\/v1|api\.deepseek\.com)\/responses$/.test(url) && typeof init?.body === "string") {
     controller.signal.throwIfAborted();
     const body = JSON.parse(init.body);
+    assert.equal(body.reasoning?.effort, protocol.effort, "Outgoing model request differs from the frozen reasoning effort");
+    verifiedGenerationRequests++;
     if (protocol.responseOutputCap === null) delete body.max_output_tokens;
     else body.max_output_tokens = Math.max(16, Math.min(protocol.responseOutputCap, protocol.tokens - used));
     init = { ...init, body: JSON.stringify(body), signal: AbortSignal.any([controller.signal, ...(init.signal ? [init.signal] : [])]) };
@@ -66,11 +69,11 @@ let output: any = null, error: string | null = null;
 const startedAt = new Date().toISOString(), started = performance.now();
 console.log("START", project, method, repetition, startedAt);
 try {
-  const common = { model: protocol.model, task, sourceRoot: recipe.starter, runRoot: work, signal: controller.signal };
+  const common = { model: protocol.model, effort: protocol.effort, task, sourceRoot: recipe.starter, runRoot: work, signal: controller.signal };
   if (method === "codex") output = await runCodex({ ...common, onCall,
     homeRoot: codexHomeRoot() });
   else {
-    const transport = meterExisting(protocol.model, onCall);
+    const transport = meterExisting(protocol.model, onCall, protocol.effort);
     try { output = await runRealMethod({ ...common, arm: "recast", client: transport.client }); }
     finally { transport.close(); }
   }
@@ -98,6 +101,7 @@ try {
 } catch (e) { gradingError = String(e); }
 const result = {
   project, method, repetition: Number(repetition), model: protocol.model,
+  effort: protocol.effort, verifiedGenerationRequests,
   inputHash: recipe.input.sha256, controlHash: protocol.inputs[project].controlHash,
   startedAt, executionMs, wallMs: performance.now() - started, work, outputRoot,
   commit: output?.commit ?? null, error: error ?? output?.error ?? null, gradingError,

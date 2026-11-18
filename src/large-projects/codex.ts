@@ -6,12 +6,13 @@ import { join } from "node:path";
 import { createInterface } from "node:readline";
 import { RealProjectFiles } from "../real-projects/method-files.ts";
 import type { MethodTask } from "../real-projects/method-types.ts";
-import type { ProjectModel } from "../project-bench/providers.ts";
+import type { ProjectModel, ReasoningEffort } from "../project-bench/providers.ts";
 import type { MeterCall } from "./meter.ts";
 import { projectTools, projectBridge } from "./codex-tools.ts";
 import { openCodexProvider } from "./codex-provider.ts";
 
 export interface CodexOptions {
+  effort?: ReasoningEffort;
   model: ProjectModel;
   sourceRoot: string;
   runRoot: string;
@@ -57,6 +58,7 @@ async function nativeTurn(
   bridge: ReturnType<typeof projectBridge>,
   signal: AbortSignal,
   preflightOnly = false,
+  effort: ReasoningEffort = "low",
 ) {
   const binary =
     process.env.RECAST_CODEX_BIN ||
@@ -70,7 +72,7 @@ async function nativeTurn(
     [
       "model = " + JSON.stringify(model),
       'model_provider = "benchmark"',
-      'model_reasoning_effort = "low"',
+      "model_reasoning_effort = " + JSON.stringify(effort),
       'approval_policy = "never"',
       'sandbox_mode = "read-only"',
       'web_search = "disabled"',
@@ -213,7 +215,7 @@ async function nativeTurn(
       status: "preflight", events, error: null };
     await request("turn/start", {
       threadId: start.thread.id,
-      effort: "low",
+      effort,
       input: [{ type: "text", text: bridge.prompt }],
     });
     const turn = await completed.promise;
@@ -259,7 +261,7 @@ export async function runCodex(options: CodexOptions) {
     await mkdir(cwd);
     const proxy = await openCodexProvider(model, onCall, signal);
     try {
-      const agent = await nativeTurn(model, home, cwd, proxy, bridge, signal, options.preflightOnly);
+      const agent = await nativeTurn(model, home, cwd, proxy, bridge, signal, options.preflightOnly, options.effort);
       runtime = {
         ...snapshot,
         agent,

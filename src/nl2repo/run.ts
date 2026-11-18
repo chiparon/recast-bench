@@ -11,6 +11,7 @@ import { preflightCodex } from "./preflight.ts";
 const { values } = parseArgs({ options: {
   batch: { type: "string" }, project: { type: "string" }, model: { type: "string" },
   tokens: { type: "string" }, seconds: { type: "string" },
+  effort: { type: "string", default: "low" },
   repeats: { type: "string", default: "1" }, plan: { type: "boolean" },
 } });
 assert(values.batch && /^[\w-]+$/.test(values.batch), "Supply --batch NAME");
@@ -18,12 +19,14 @@ assert(PROJECT_MODELS.includes(values.model as any), "Supply --model " + PROJECT
 const tokens = values.tokens === undefined ? null : Number(values.tokens);
 const seconds = values.seconds === undefined ? null : Number(values.seconds);
 const repeats = Number(values.repeats);
+const effort = values.effort;
+assert(effort === "low" || effort === "high", "Supply --effort low or high");
 assert([tokens, seconds, repeats].every(n => n === null || (Number.isSafeInteger(n) && n > 0)), "Explicit budgets/repeats must be positive integers");
 const projects = ["sqlparse", "rich-click", "deepdiff", "boltons", "jinja"].filter(p => !values.project || p === values.project);
 assert(projects.length, "Unknown project");
 const root = resolve("results/nl2repo", values.batch);
 const protocol = {
-  version: "nl2repo-declaration-v1", model: values.model, effort: "low", tokens, seconds, repeats, projects,
+  version: "nl2repo-declaration-v1", model: values.model, effort, tokens, seconds, repeats, projects,
   methods: ["recast", "codex"], references: "empty", score: "fixed-baseline-pass-rate; macro-average-per-project",
   ...productIdentity(), implementationHash: await implementationHash(), responseOutputCap: tokens === null ? null : 8192,
   inputs: {} as Record<string, { hash: string; controlHash: string | null; ready: boolean }>,
@@ -41,7 +44,7 @@ if (values.plan) {
   console.log(JSON.stringify({ ...protocol, trials: projects.length * 2 * repeats, billableRequests: 0 }, null, 2));
 } else {
   assert(await providerAvailable(values.model as any), "Missing model credentials (use the existing bench .env.local)");
-  await preflightCodex(values.model as any, projects[0]);
+  await preflightCodex(values.model as any, projects[0], effort);
   await mkdir(root, { recursive: true });
   const lease = await open(join(root, "running.lock"), "wx");
   try {
