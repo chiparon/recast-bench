@@ -2,7 +2,9 @@
 
 新分支：`codex/nl2repo-bench`。这是从 NL2Repo 原项目挖空实现的独立实验，比较 RECAST 项目流水线与原生 Codex CLI 的项目测试通过率。
 
-[选手输入 ZIP](repro/nl2repo-v1-inputs.zip) · [准备状态与实测基线](results/nl2repo-readiness.md) · [输入清单](results/nl2repo-inputs.json) · [来源锁](src/nl2repo/upstream-lock.json)
+[首轮配对结果](results/nl2repo-nl2repo-v1.md) · [选手输入 ZIP](repro/nl2repo-v1-inputs.zip) · [准备状态与实测基线](results/nl2repo-readiness.md) · [输入清单](results/nl2repo-inputs.json) · [来源锁](src/nl2repo/upstream-lock.json)
+
+首轮使用 `gpt-6-luna`、每题每组 160,000 个已报告 Token 停止阈值，每方法每题采样一次。五项目等权平均通过率为 **RECAST 0.14% / Codex 2.20%**；10 次均因 Token 阈值终止，完整交付均为 0/5。这反映本轮预算、严格声明骨架、空历史库及逐文件调度条件下的表现。逐题结果、实际用量和生成代码见报告与证据归档。
 
 ## 项目与来源
 
@@ -28,7 +30,7 @@ NL2Repo 原版从空目录生成项目。本实验提供声明骨架，成绩应
 
 DeepDiff 需求中的 `deepdiff==8.5.0 (core library)` 自依赖已删除，修订次数记录在清单中。测试运行环境只安装依赖，不安装目标答案包。两组外部历史参考库均为空；这一版本衡量项目组织与实现能力，不衡量有历史语料时的检索增益。
 
-两组可读取的文件、允许编辑的生产 `.py` 文件、模块职责和公开检查相同。RECAST 使用现有产品的 `ProjectPipeline` 与 `WorkspaceTranslationRuntime`；Codex 使用实际 CLI 的 `app-server`，通过受限的读写、编译和测试工具操作同一文件范围，不使用另写的 raw-agent 循环。每次方法运行从同一输入创建独立快照。RECAST 按文件派发模块，末尾集成；Codex 自主安排项目工作。
+两组可读取的文件、允许编辑的生产 `.py` 文件、模块职责和公开检查相同。RECAST 使用现有产品的 `ProjectPipeline` 与 `WorkspaceTranslationRuntime`；Codex 使用实际 CLI 的 `app-server`，通过受限的读写、编译和测试工具操作同一文件范围，不使用另写的 raw-agent 循环。每次方法运行从同一输入创建独立快照。当前公共清单未提供依赖边，RECAST 按文件顺序派发模块，末尾集成；Codex 自主安排项目工作。
 
 ## 配对协议与判分
 

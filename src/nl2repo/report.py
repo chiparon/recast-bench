@@ -1,5 +1,6 @@
 import argparse
 import json
+import gzip
 from pathlib import Path
 from prepare import ROOT, WORK
 from scoring import macro_average, passed
@@ -58,12 +59,14 @@ def build_report(batch=None):
                             raise ValueError("Trial model differs from batch protocol")
                     rows.append(row)
         complete = all(r.get("score") is not None for r in rows)
-        text += ["## Paired model results", "", "| Project | Repetition | Method | Test pass rate | Tokens | State |",
+        text += ["## Per-trial details", "", "| Project | Repetition | Method | Test pass rate | Reported tokens | State |",
                  "|---|---:|---|---:|---:|---|"]
         for r in rows:
             s = r.get("score")
             rate = f'{s["passed"]}/{s["total"]} ({s["rate"]:.2%})' if s else "pending / infrastructure error"
-            text.append(f'| {r["project"]} | {r["repetition"]} | {r["method"]} | {rate} | {r.get("usage", {}).get("totalTokens", "—")} | {r.get("error") or r.get("gradingError") or ("pending" if not s else "graded")} |')
+            state = r.get("budgetStop") or r.get("gradingError") or r.get("error") or ("pending" if not s else "graded")
+            state = str(state).replace("|", "\\|").replace("\n", " ")
+            text.append(f'| {r["project"]} | {r["repetition"]} | {r["method"]} | {rate} | {r.get("usage", {}).get("totalTokens", "—")} | {state} |')
         averages = {}
         if complete:
             for method in protocol["methods"]:
@@ -71,12 +74,45 @@ def build_report(batch=None):
                                  for p in protocol["projects"]]
                 averages[method] = macro_average(project_means)
             text += ["", "Macro average: " + ", ".join(f"{m}={v:.2%}" for m, v in averages.items())]
+            overview = ["# NL2Repo paired results: " + batch, "",
+                f'Model: **{protocol["model"]}**, effort `{protocol["effort"]}`. Each method receives the same input and a **{protocol["tokens"]:,} reported-token stop threshold / {protocol["seconds"]:,} second execution budget** per project. Repetitions per method: {protocol["repeats"]}.', "",
+                "| Project | RECAST test pass rate | Codex test pass rate |", "|---|---:|---:|"]
+            for p in protocol["projects"]:
+                cells = []
+                for m in protocol["methods"]:
+                    scores = [r["score"] for r in rows if r["project"] == p and r["method"] == m]
+                    mean = macro_average(scores)
+                    cells.append(f'{scores[0]["passed"]}/{scores[0]["total"]} ({mean:.2%})' if len(scores) == 1 else f"{mean:.2%}")
+                overview.append(f'| {p} | ' + " | ".join(cells) + " |")
+            overview.append("| Equal-project average | " + " | ".join(f"**{averages[m]:.2%}**" for m in protocol["methods"]) + " |")
+            budget_stops = sum(bool(r.get("budgetStop")) for r in rows)
+            full = {m: sum(r["score"]["allPassed"] for r in rows if r["method"] == m) for m in protocol["methods"]}
+            overview += ["", f'{budget_stops}/{len(rows)} trials stopped at the configured budget. Fully passing deliveries: ' + ", ".join(f"{m}={v}/{len(protocol['projects']) * protocol['repeats']}" for m, v in full.items()) + ".",
+                "", "The threshold is checked after a provider response, so the final request can exceed it. Actual reported usage appears below; all usage records in this batch retain their completeness flag. Original harness cancellation messages are preserved in JSON, while the displayed stop reason comes from the benchmark budget controller.",
+                "", "These are one-budget, limited-sample results for the declaration-skeleton setup, with an empty reference corpus and per-file RECAST scheduling without supplied dependency edges. Most runs retain import/collection failures. They do not establish a general model or harness ranking.",
+                "", "## Inputs and controls", ""]
+            text = overview + text[2:]
         else:
             text += ["", "Batch incomplete: no aggregate comparison is reported."]
-        result.update(kind="paired-model-comparison", batch=batch, complete=complete, macroAverage=averages, trials=rows)
+        result.update(kind="paired-model-comparison", batch=batch, protocol=protocol, complete=complete, macroAverage=averages, trials=rows)
         destination = ROOT / "results" / ("nl2repo-" + batch)
+        if complete:
+            evidence = {"protocol": protocol, "controls": {}, "trials": rows, "deliveries": {}, "calls": {}}
+            for p in protocol["projects"]:
+                evidence["controls"][p] = json.loads((ROOT / "results/nl2repo-controls/docker" / f"{p}.json").read_text(encoding="utf-8"))
+            for r in rows:
+                key = f'{r["project"]}-{r["repetition"]}-{r["method"]}'
+                case = json.loads((WORK / "cases" / f'{r["project"]}.json').read_text(encoding="utf-8"))
+                if r.get("outputRoot"):
+                    evidence["deliveries"][key] = {m["path"]: (Path(r["outputRoot"]) / m["path"]).read_text(encoding="utf-8") for m in case["modules"]}
+                calls = Path(r["work"]) / "calls.ndjson"
+                evidence["calls"][key] = [json.loads(line) for line in calls.read_text(encoding="utf-8").splitlines()] if calls.exists() else []
+            evidence_path = destination.with_name(destination.name + "-evidence.json.gz")
+            with gzip.open(evidence_path, "wt", encoding="utf-8") as archive:
+                json.dump(evidence, archive, ensure_ascii=False)
+            text += ["", f"[Reproducible evidence: protocol, controls, per-trial usage and delivered files]({evidence_path.name})"]
     json_write(destination.with_suffix(".json"), result)
-    destination.with_suffix(".md").write_text("\n".join(text) + "\n", encoding="utf-8")
+    destination.with_suffix(".md").write_text("\n".join(text).rstrip() + "\n", encoding="utf-8", newline="\n")
     print(destination.with_suffix(".md"))
 
 
