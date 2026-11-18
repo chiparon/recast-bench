@@ -6,6 +6,8 @@
 
 首轮使用 `gpt-6-luna`、每题每组 160,000 个已报告 Token 停止阈值，每方法每题采样一次。五项目等权平均通过率为 **RECAST 0.14% / Codex 2.20%**；10 次均因 Token 阈值终止，完整交付均为 0/5。这反映本轮预算、严格声明骨架、空历史库及逐文件调度条件下的表现。逐题结果、实际用量和生成代码见报告与证据归档。
 
+sqlparse 单题复跑取消了两组的累计 Token、单次响应输出和项目总时长上限。两组沿用首轮相同的模型、输入和 461 个有效测试。RECAST 完成 5 个模块后，在 grouping 模块报告其依赖的 sql 和 tokens 模块仍为只读骨架，流水线以失败结束，部分代码通过 0/461。Codex 自主结束会话，公开的双语句拆分检查失败，部分代码通过 85/461（18.44%）。两组实际用量分别为 760,889 和 2,029,857 Token。[sqlparse 复跑报告](results/nl2repo-sqlparse-unlimited-v2.md)
+
 ## 项目与来源
 
 [NL2Repo 官方仓库](https://github.com/multimodal-art-projection/NL2RepoBench) 固定在 `781a1da1ee41fb8edb0bed22f586d69111610edf`。需求来自其 `test_files/<project>/start.md`，原项目与回归测试从官方 GHCR 镜像的原始源码 COPY 层恢复；镜像摘要、层摘要及源码目录均已锁定。镜像后续层删除了原项目，因此构题器直接下载已锁定的源码层，不要求 Docker Desktop 正常运行。
