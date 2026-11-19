@@ -1,0 +1,169 @@
+{
+  "gold": {
+    "finite endpoints": {
+      "passed": true
+    },
+    "width and midpoint": {
+      "passed": true
+    },
+    "degenerate interval": {
+      "passed": true
+    },
+    "finite addition": {
+      "passed": true
+    },
+    "negation": {
+      "passed": true
+    },
+    "scalar subtraction": {
+      "passed": true
+    },
+    "mixed-sign multiplication": {
+      "passed": true
+    },
+    "unbounded interval": {
+      "passed": true
+    },
+    "absolute value": {
+      "passed": true
+    },
+    "intersection": {
+      "passed": true
+    },
+    "contained value": {
+      "passed": true
+    }
+  },
+  "starter": {
+    "finite endpoints": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "width and midpoint": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "degenerate interval": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "finite addition": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "negation": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "scalar subtraction": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "mixed-sign multiplication": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "unbounded interval": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "absolute value": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "intersection": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "contained value": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    }
+  },
+  "matched": {
+    "finite endpoints": {
+      "passed": true
+    },
+    "width and midpoint": {
+      "passed": true
+    },
+    "degenerate interval": {
+      "passed": true
+    },
+    "finite addition": {
+      "passed": true
+    },
+    "negation": {
+      "passed": true
+    },
+    "scalar subtraction": {
+      "passed": true
+    },
+    "mixed-sign multiplication": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "unbounded interval": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "absolute value": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "intersection": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "contained value": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    }
+  },
+  "none": {
+    "finite endpoints": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "width and midpoint": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "degenerate interval": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "finite addition": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "negation": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "scalar subtraction": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "mixed-sign multiplication": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "unbounded interval": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "absolute value": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "intersection": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    },
+    "contained value": {
+      "passed": false,
+      "error": "NotImplementedError: CAS reconstruction TODO"
+    }
+  }
+}

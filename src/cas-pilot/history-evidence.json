@@ -1,0 +1,48 @@
+{
+  "measurement": "Physical and nonblank lines of distributed production source, including comments and documentation strings. License and attribution files are counted separately.",
+  "repositories": [
+    {
+      "repository": "flintlib/flint",
+      "commit": "a300f5a741b8f12cf9b6d4236631f62260f805a4",
+      "language": "C",
+      "source_files": 3296,
+      "physical_lines": 493100,
+      "nonblank_source_lines": 409021,
+      "license_and_attribution_files": 3,
+      "inventory_sha256": "dac92149dc35e96d5645cb77506c47b98527008097525a0c6c1535f9fa741e30"
+    },
+    {
+      "repository": "kredel/java-algebra-system",
+      "commit": "255fe6b2d26cef4e89ea64d931dd738bea8f8624",
+      "language": "Java",
+      "source_files": 438,
+      "physical_lines": 180494,
+      "nonblank_source_lines": 156886,
+      "license_and_attribution_files": 4,
+      "inventory_sha256": "9c67b8bfc011058680a3c4a628c86308dd7d9f0e4325ce42038896fe6699e1b6"
+    },
+    {
+      "repository": "Nemocas/AbstractAlgebra.jl",
+      "commit": "2235d6a60348cbb60f4af97332a0dbe49ae24a51",
+      "language": "Julia",
+      "source_files": 122,
+      "physical_lines": 61952,
+      "nonblank_source_lines": 53641,
+      "license_and_attribution_files": 1,
+      "inventory_sha256": "19ac7624f48d8bfadc05658877b39ebff2abf19a6c789cc515e4af31b329587c"
+    },
+    {
+      "repository": "rtoy/maxima",
+      "commit": "3a1c2c2c7363a58814f9c94f47f966d4861634b1",
+      "language": "Common Lisp",
+      "source_files": 41,
+      "physical_lines": 57263,
+      "nonblank_source_lines": 51924,
+      "license_and_attribution_files": 3,
+      "inventory_sha256": "c041527a3246d8ca1724fd7618f13ce545f93f8ec7f69c6376be7a3670c76807"
+    }
+  ],
+  "source_files": 3897,
+  "physical_lines": 792809,
+  "nonblank_source_lines": 671472
+}

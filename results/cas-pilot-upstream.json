@@ -1,0 +1,100 @@
+{
+  "collection-golden": {
+    "commit": "16fa855354eb7bcabd3fe10993841e03b1382692",
+    "packages": [
+      "calculus",
+      "combinatorics",
+      "concrete",
+      "functions",
+      "geometry",
+      "integrals",
+      "matrices",
+      "ntheory",
+      "polys",
+      "printing",
+      "series",
+      "sets",
+      "simplify",
+      "solvers",
+      "tensor"
+    ],
+    "shard": "1/1",
+    "timeoutSeconds": 180,
+    "collectOnly": true,
+    "totalSuiteFiles": 320,
+    "selectedFiles": 320,
+    "collectedTests": 7698,
+    "counts": {},
+    "pytestExit": 0,
+    "status": "passed",
+    "exitCode": 0,
+    "wallSeconds": 79.515
+  },
+  "sets-golden": {
+    "commit": "16fa855354eb7bcabd3fe10993841e03b1382692",
+    "packages": [
+      "sets"
+    ],
+    "shard": "1/1",
+    "timeoutSeconds": 180,
+    "collectOnly": false,
+    "totalSuiteFiles": 7,
+    "selectedFiles": 7,
+    "collectedTests": 224,
+    "counts": {
+      "passed": 216,
+      "xfailed": 7,
+      "xpassed": 1
+    },
+    "pytestExit": 0,
+    "status": "passed",
+    "exitCode": 0,
+    "wallSeconds": 11.688
+  },
+  "sets-starter": {
+    "commit": "16fa855354eb7bcabd3fe10993841e03b1382692",
+    "packages": [
+      "sets"
+    ],
+    "shard": "1/1",
+    "timeoutSeconds": 180,
+    "collectOnly": false,
+    "totalSuiteFiles": 7,
+    "selectedFiles": 7,
+    "collectedTests": 0,
+    "counts": {},
+    "pytestExit": 4,
+    "status": "candidate_setup_failed",
+    "exitCode": 4,
+    "wallSeconds": 1.969
+  },
+  "calculus-golden": {
+    "commit": "16fa855354eb7bcabd3fe10993841e03b1382692",
+    "packages": [
+      "calculus"
+    ],
+    "shard": "1/1",
+    "timeoutSeconds": 240,
+    "totalSuiteFiles": 5,
+    "selectedFiles": 5,
+    "status": "timeout",
+    "exitCode": 124,
+    "wallSeconds": 240.016
+  },
+  "calculus-starter": {
+    "commit": "16fa855354eb7bcabd3fe10993841e03b1382692",
+    "packages": [
+      "calculus"
+    ],
+    "shard": "1/1",
+    "timeoutSeconds": 240,
+    "collectOnly": false,
+    "totalSuiteFiles": 5,
+    "selectedFiles": 5,
+    "counts": {},
+    "pytestExit": 4,
+    "status": "candidate_setup_failed",
+    "exitCode": 4,
+    "wallSeconds": 1.922
+  }
+}

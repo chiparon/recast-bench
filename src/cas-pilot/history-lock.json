@@ -1,0 +1,251 @@
+{
+  "repositories": [
+    {
+      "directory": "flint",
+      "repository": "flintlib/flint",
+      "tag": "v3.1.3",
+      "commit": "a300f5a741b8f12cf9b6d4236631f62260f805a4",
+      "committed": "2024-04-25T21:00:25Z",
+      "zip_sha256": "056f2491c85e30a592104fca33c4bd7def938e6227b39f5af0e8df615a0fa19a",
+      "language": "C",
+      "licenses": [
+        "AUTHORS",
+        "COPYING",
+        "COPYING.LESSER"
+      ],
+      "sources": [
+        "src/fmpz*",
+        "src/fmpq*",
+        "src/fq*",
+        "src/nmod*",
+        "src/acb_hypgeom*",
+        "src/arb_hypgeom*",
+        "src/fexpr*",
+        "src/qqbar*",
+        "src/arith*",
+        "src/gr*",
+        "src/mpoly*"
+      ],
+      "extensions": [
+        ".c",
+        ".h"
+      ],
+      "topics": {
+        "integer and multivariate factorization": [
+          "src/fmpz_poly_factor/factor_zassenhaus.c",
+          "src/fmpz_mpoly/gcd_zippel.c"
+        ],
+        "matrix determinants and exact linear solves": [
+          "src/fmpz_mat/det_bareiss.c",
+          "src/fmpz_mat/solve_fflu.c"
+        ],
+        "symbolic expressions and canonicalization": [
+          "src/fexpr/expanded_normal_form.c"
+        ],
+        "power series and special functions": [
+          "src/fmpq_poly/compose_series_brent_kung.c",
+          "src/acb_hypgeom/2f1.c"
+        ]
+      }
+    },
+    {
+      "directory": "jas",
+      "repository": "kredel/java-algebra-system",
+      "tag": "v2.7.200",
+      "commit": "255fe6b2d26cef4e89ea64d931dd738bea8f8624",
+      "committed": "2023-07-04T08:41:17Z",
+      "zip_sha256": "c574c7419e7071d780ad80834295ae6306ca001aa1ad1eafea4f80a3bce094f4",
+      "language": "Java",
+      "licenses": [
+        "COPYING",
+        "COPYING.jas",
+        "COPYING.lgpl",
+        "COPYING.lgpl.jas"
+      ],
+      "sources": [
+        "src/edu/jas/*"
+      ],
+      "extensions": [
+        ".java"
+      ],
+      "topics": {
+        "Groebner bases and ideals": [
+          "src/edu/jas/gb/GroebnerBaseSeq.java",
+          "src/edu/jas/gbufd/PolyGBUtil.java"
+        ],
+        "factorization and algebraic roots": [
+          "src/edu/jas/ufd/FactorInteger.java",
+          "src/edu/jas/root/RootUtil.java"
+        ],
+        "rational integration": [
+          "src/edu/jas/integrate/ElementaryIntegration.java"
+        ],
+        "matrices": [
+          "src/edu/jas/vector/GenMatrix.java"
+        ]
+      }
+    },
+    {
+      "directory": "abstractalgebra",
+      "repository": "Nemocas/AbstractAlgebra.jl",
+      "tag": "v0.42.0",
+      "commit": "2235d6a60348cbb60f4af97332a0dbe49ae24a51",
+      "committed": "2024-07-18T18:18:02Z",
+      "zip_sha256": "7b6195ba5d0eba8ff6a071b051351f02e623750b976a3f917dffa982d3d2dcd8",
+      "language": "Julia",
+      "licenses": [
+        "LICENSE.md"
+      ],
+      "sources": [
+        "src/*"
+      ],
+      "extensions": [
+        ".jl"
+      ],
+      "topics": {
+        "polynomial and finite field arithmetic": [
+          "src/algorithms/DensePoly.jl",
+          "src/algorithms/FinField.jl"
+        ],
+        "multivariate factorization": [
+          "src/algorithms/MPolyFactor.jl"
+        ],
+        "matrix normal forms and solves": [
+          "src/MatrixNormalForms.jl",
+          "src/Solve.jl"
+        ],
+        "formal series": [
+          "src/LaurentSeries.jl",
+          "src/PuiseuxSeries.jl"
+        ]
+      }
+    },
+    {
+      "directory": "maxima",
+      "repository": "rtoy/maxima",
+      "upstream": "https://git.code.sf.net/p/maxima/code",
+      "tag": "5.47.0",
+      "commit": "3a1c2c2c7363a58814f9c94f47f966d4861634b1",
+      "committed": "2023-05-31T23:51:08Z",
+      "zip_sha256": "bffee732734c2615c5e39006f0cb7f18686852b6f5f7c1c52b8916661528f02e",
+      "language": "Common Lisp",
+      "licenses": [
+        "AUTHORS",
+        "COPYING",
+        "README"
+      ],
+      "selection": "Curated unchanged implementation files; SourceForge and GitHub mirror tags peel to the same commit. src/sqrtdenest.lisp is omitted because its source refers directly to the SymPy implementation.",
+      "extensions": [
+        ".lisp"
+      ],
+      "sources": [
+        "share/tensor/canten.lisp",
+        "share/tensor/gener.lisp",
+        "share/tensor/itensor.lisp",
+        "share/tensor/symtry.lisp",
+        "share/tensor/tentex.lisp",
+        "src/algsys.lisp",
+        "src/asum.lisp",
+        "src/bessel.lisp",
+        "src/combin.lisp",
+        "src/csimp.lisp",
+        "src/csimp2.lisp",
+        "src/defint.lisp",
+        "src/desoln.lisp",
+        "src/displa.lisp",
+        "src/displm.lisp",
+        "src/ellipt.lisp",
+        "src/expintegral.lisp",
+        "src/fortra.lisp",
+        "src/gamma.lisp",
+        "src/grind.lisp",
+        "src/hayat.lisp",
+        "src/hypergeometric.lisp",
+        "src/hypgeo.lisp",
+        "src/limit.lisp",
+        "src/mactex.lisp",
+        "src/nset.lisp",
+        "src/pade.lisp",
+        "src/psolve.lisp",
+        "src/residu.lisp",
+        "src/risch.lisp",
+        "src/series.lisp",
+        "src/simp.lisp",
+        "src/sin.lisp",
+        "src/sinint.lisp",
+        "src/solve.lisp",
+        "src/sumcon.lisp",
+        "src/tlimit.lisp",
+        "src/todd-coxeter.lisp",
+        "src/trgred.lisp",
+        "src/trigi.lisp",
+        "src/trigo.lisp"
+      ],
+      "topics": {
+        "expression and trigonometric simplification": [
+          "src/simp.lisp",
+          "src/csimp.lisp",
+          "src/csimp2.lisp",
+          "src/trigi.lisp",
+          "src/trigo.lisp",
+          "src/trgred.lisp"
+        ],
+        "indefinite, definite and Risch integration": [
+          "src/risch.lisp",
+          "src/sin.lisp",
+          "src/sinint.lisp",
+          "src/defint.lisp"
+        ],
+        "power series, Taylor expansion and Pade approximation": [
+          "src/series.lisp",
+          "src/hayat.lisp",
+          "src/pade.lisp"
+        ],
+        "calculus limits and residues": [
+          "src/limit.lisp",
+          "src/tlimit.lisp",
+          "src/residu.lisp"
+        ],
+        "linear systems, polynomial systems and differential equation solving": [
+          "src/solve.lisp",
+          "src/algsys.lisp",
+          "src/desoln.lisp",
+          "src/psolve.lisp"
+        ],
+        "special functions and elliptic integrals": [
+          "src/gamma.lisp",
+          "src/bessel.lisp",
+          "src/hypergeometric.lisp",
+          "src/hypgeo.lisp",
+          "src/ellipt.lisp",
+          "src/expintegral.lisp"
+        ],
+        "symbolic summation and contraction": [
+          "src/asum.lisp",
+          "src/sumcon.lisp"
+        ],
+        "set operations": [
+          "src/nset.lisp"
+        ],
+        "factorial simplification and coset enumeration": [
+          "src/combin.lisp",
+          "src/todd-coxeter.lisp"
+        ],
+        "expression display, TeX rendering and Fortran output": [
+          "src/displa.lisp",
+          "src/displm.lisp",
+          "src/mactex.lisp",
+          "src/grind.lisp",
+          "src/fortra.lisp"
+        ],
+        "indexed tensor algebra, canonicalization and symmetry": [
+          "share/tensor/itensor.lisp",
+          "share/tensor/canten.lisp",
+          "share/tensor/symtry.lisp",
+          "share/tensor/tentex.lisp",
+          "share/tensor/gener.lisp"
+        ]
+      }
+    }
+  ]
+}

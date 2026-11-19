@@ -1,0 +1,101 @@
+{
+  "metric": "Distinct masked source lines with a CPython LINE event and masked outer functions entered during gold private grading. Multiline expressions may emit a single line event.",
+  "total": {
+    "bodies": 11930,
+    "removedCodeLines": 108059,
+    "reachedBodies": 5295,
+    "reachedCodeLines": 46844
+  },
+  "packages": {
+    "calculus": {
+      "bodies": 48,
+      "removedCodeLines": 839,
+      "reachedBodies": 36,
+      "reachedCodeLines": 560
+    },
+    "combinatorics": {
+      "bodies": 580,
+      "removedCodeLines": 6996,
+      "reachedBodies": 342,
+      "reachedCodeLines": 3243
+    },
+    "concrete": {
+      "bodies": 90,
+      "removedCodeLines": 1690,
+      "reachedBodies": 66,
+      "reachedCodeLines": 796
+    },
+    "functions": {
+      "bodies": 1540,
+      "removedCodeLines": 11532,
+      "reachedBodies": 591,
+      "reachedCodeLines": 4414
+    },
+    "geometry": {
+      "bodies": 341,
+      "removedCodeLines": 2798,
+      "reachedBodies": 195,
+      "reachedCodeLines": 1255
+    },
+    "integrals": {
+      "bodies": 403,
+      "removedCodeLines": 8057,
+      "reachedBodies": 232,
+      "reachedCodeLines": 3845
+    },
+    "matrices": {
+      "bodies": 1181,
+      "removedCodeLines": 7398,
+      "reachedBodies": 474,
+      "reachedCodeLines": 2811
+    },
+    "ntheory": {
+      "bodies": 202,
+      "removedCodeLines": 3272,
+      "reachedBodies": 84,
+      "reachedCodeLines": 1251
+    },
+    "polys": {
+      "bodies": 3725,
+      "removedCodeLines": 25261,
+      "reachedBodies": 1649,
+      "reachedCodeLines": 11252
+    },
+    "printing": {
+      "bodies": 1771,
+      "removedCodeLines": 11548,
+      "reachedBodies": 374,
+      "reachedCodeLines": 2632
+    },
+    "series": {
+      "bodies": 241,
+      "removedCodeLines": 2351,
+      "reachedBodies": 178,
+      "reachedCodeLines": 1524
+    },
+    "sets": {
+      "bodies": 431,
+      "removedCodeLines": 2549,
+      "reachedBodies": 260,
+      "reachedCodeLines": 1529
+    },
+    "simplify": {
+      "bodies": 234,
+      "removedCodeLines": 6349,
+      "reachedBodies": 153,
+      "reachedCodeLines": 3667
+    },
+    "solvers": {
+      "bodies": 461,
+      "removedCodeLines": 11555,
+      "reachedBodies": 298,
+      "reachedCodeLines": 5543
+    },
+    "tensor": {
+      "bodies": 682,
+      "removedCodeLines": 5864,
+      "reachedBodies": 363,
+      "reachedCodeLines": 2522
+    }
+  }
+}

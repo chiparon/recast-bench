@@ -1,0 +1,944 @@
+{
+  "batch": "cas-pair-v2",
+  "model": "gpt-6-luna",
+  "retrieval": {
+    "batch": "cas-pair-v2",
+    "model": "gpt-6-luna",
+    "image": "sha256:59a6379efe408d91e9b110ccdadc16c18ffd97eb8bf2e219505b43165f1fd32f",
+    "controls": {
+      "starter/public": {
+        "polys": [
+          0,
+          1
+        ],
+        "matrices": [
+          0,
+          1
+        ],
+        "functions": [
+          0,
+          1
+        ],
+        "integrals": [
+          0,
+          1
+        ],
+        "solvers": [
+          0,
+          1
+        ],
+        "simplify": [
+          0,
+          1
+        ],
+        "series": [
+          0,
+          1
+        ],
+        "concrete": [
+          0,
+          1
+        ],
+        "ntheory": [
+          0,
+          1
+        ],
+        "combinatorics": [
+          0,
+          1
+        ],
+        "tensor": [
+          0,
+          1
+        ],
+        "geometry": [
+          0,
+          1
+        ],
+        "sets": [
+          0,
+          1
+        ],
+        "calculus": [
+          0,
+          1
+        ],
+        "printing": [
+          0,
+          1
+        ]
+      },
+      "starter/private": {
+        "polys": [
+          1,
+          96
+        ],
+        "matrices": [
+          0,
+          92
+        ],
+        "functions": [
+          0,
+          79
+        ],
+        "integrals": [
+          0,
+          54
+        ],
+        "solvers": [
+          0,
+          67
+        ],
+        "simplify": [
+          0,
+          59
+        ],
+        "series": [
+          0,
+          68
+        ],
+        "concrete": [
+          0,
+          26
+        ],
+        "ntheory": [
+          1,
+          40
+        ],
+        "combinatorics": [
+          0,
+          48
+        ],
+        "tensor": [
+          0,
+          56
+        ],
+        "geometry": [
+          0,
+          44
+        ],
+        "sets": [
+          0,
+          54
+        ],
+        "calculus": [
+          0,
+          22
+        ],
+        "printing": [
+          2,
+          92
+        ]
+      },
+      "restored/public": {
+        "polys": [
+          1,
+          1
+        ],
+        "matrices": [
+          1,
+          1
+        ],
+        "functions": [
+          1,
+          1
+        ],
+        "integrals": [
+          1,
+          1
+        ],
+        "solvers": [
+          1,
+          1
+        ],
+        "simplify": [
+          1,
+          1
+        ],
+        "series": [
+          1,
+          1
+        ],
+        "concrete": [
+          1,
+          1
+        ],
+        "ntheory": [
+          1,
+          1
+        ],
+        "combinatorics": [
+          1,
+          1
+        ],
+        "tensor": [
+          1,
+          1
+        ],
+        "geometry": [
+          1,
+          1
+        ],
+        "sets": [
+          1,
+          1
+        ],
+        "calculus": [
+          1,
+          1
+        ],
+        "printing": [
+          1,
+          1
+        ]
+      },
+      "restored/private": {
+        "polys": [
+          96,
+          96
+        ],
+        "matrices": [
+          92,
+          92
+        ],
+        "functions": [
+          79,
+          79
+        ],
+        "integrals": [
+          54,
+          54
+        ],
+        "solvers": [
+          67,
+          67
+        ],
+        "simplify": [
+          59,
+          59
+        ],
+        "series": [
+          68,
+          68
+        ],
+        "concrete": [
+          26,
+          26
+        ],
+        "ntheory": [
+          40,
+          40
+        ],
+        "combinatorics": [
+          48,
+          48
+        ],
+        "tensor": [
+          56,
+          56
+        ],
+        "geometry": [
+          44,
+          44
+        ],
+        "sets": [
+          54,
+          54
+        ],
+        "calculus": [
+          22,
+          22
+        ],
+        "printing": [
+          92,
+          92
+        ]
+      }
+    },
+    "starterHash": "77929ab53ec6f607361755670b9c3127384b8fb068b76084ae76c468f24dd3aa",
+    "indexed": 3897,
+    "noneIndexed": 0,
+    "probes": [
+      {
+        "repo": "flint",
+        "files": 3296,
+        "query": "fmpz_poly_factor_zassenhaus",
+        "match": {
+          "path": "history/flint/src/fmpz_poly_factor/factor_zassenhaus.c",
+          "start": 217,
+          "content": "            flint_printf(\"|Post hensel lift factorisation (fmpz_poly):\\n\");\n            fmpz_poly_factor_print(lifted_fac);\n            #endif\n\n            fmpz_set_ui(T, p);\n            fmpz_pow_ui(T, T, a);\n            fmpz_poly_factor_zassenhaus_recombination_with_prune(\n                                          final_fac, lifted_fac, f, T, exp, Z);\n\n            fmpz_poly_factor_clear(lifted_fac);\n            fmpz_clear(T);\n        }\n\n        nmod_poly_factor_clear(fac);\n        zassenhaus_prune_clear(Z);\n    }\n}\n\nvoid fmpz_poly_factor_zassenhaus(fmpz_poly_factor_t fac, const fmpz_poly_t G)\n{\n    const slong lenG = G->length;\n    fmpz_poly_t g;\n\n    if (lenG == 0)\n    {\n        fmpz_set_ui(&fac->c, 0);\n        return;\n    }\n    if (lenG == 1)\n    {\n        fmpz_set(&fac->c, G->coeffs);\n        return;\n    }\n\n    fmpz_poly_init(g);\n"
+        }
+      },
+      {
+        "repo": "jas",
+        "files": 438,
+        "query": "GroebnerBaseSeq",
+        "match": {
+          "path": "history/jas/src/edu/jas/gb/GroebnerBaseSeq.java",
+          "start": 37,
+          "content": "\n\n    private static final boolean debug = logger.isDebugEnabled();\n\n\n    /**\n     * Constructor.\n     */\n    public GroebnerBaseSeq() {\n        super();\n    }\n\n\n    /**\n     * Constructor.\n     * @param red Reduction engine\n     */\n    public GroebnerBaseSeq(Reduction<C> red) {\n        super(red);\n    }\n\n\n    /**\n     * Constructor.\n     * @param pl pair selection strategy\n     */\n    public GroebnerBaseSeq(PairList<C> pl) {\n        super(pl);\n    }\n\n\n    /**\n     * Constructor.\n     * @param red Reduction engine\n     * @param pl pair selection strategy\n     */"
+        }
+      },
+      {
+        "repo": "abstractalgebra",
+        "files": 122,
+        "query": "PuiseuxSeriesRing",
+        "match": {
+          "path": "history/abstractalgebra/src/generic/GenericTypes.jl",
+          "start": 793,
+          "content": "\n###############################################################################\n#\n#   PuiseuxSeriesRing / PuiseuxSeriesRingElem\n#\n###############################################################################\n\n@attributes mutable struct PuiseuxSeriesRing{T <: RingElement} <: AbstractAlgebra.Ring\n   laurent_ring::Ring\n\n   function PuiseuxSeriesRing{T}(R::LaurentSeriesRing{T}, cached::Bool = true) where T <: RingElement\n      return get_cached!(PuiseuxSeriesID, R, cached) do\n         new{T}(R)\n      end::PuiseuxSeriesRing{T}\n   end\nend\n\nconst PuiseuxSeriesID = CacheDictType{Ring, Ring}()\n\nmutable struct PuiseuxSeriesRingElem{T <: RingElement} <: AbstractAlgebra.RingElem\n   data::LaurentSeriesRingElem{T}\n   scale::Int\n   parent::PuiseuxSeriesRing{T}\n\n   function PuiseuxSeriesRingElem{T}(d::LaurentSeriesRingElem{T}, scale::Int) where T <: RingElement\n      new{T}(d, scale)\n   end\nend\n\n###############################################################################\n#\n#   PuiseuxSeriesField / PuiseuxSeriesFieldElem\n#\n###############################################################################\n\n@attributes mutable struct PuiseuxSeriesField{T <: FieldElement} <: AbstractAlgebra.Field"
+        }
+      },
+      {
+        "repo": "maxima",
+        "files": 41,
+        "query": "risch",
+        "match": {
+          "path": "history/maxima/src/risch.lisp",
+          "start": 217,
+          "content": "      ;; The result can contain solveable integrals. Look for this case.\n      (if (isinop result '%integrate)\n          ;; Found an integral. Evaluate the result again.\n          ;; Set the flag *in-risch-p* to make sure that we do not call\n          ;; rischint again from the integrator. This avoids endless loops.\n          (let ((*in-risch-p* t)) \n            (meval (list '($ev) result '$nouns)))\n          result))))\n\n(defun tryrisch (exp risch-mainvar risch-ratform risch-intvar risch-liflag risch-degree risch-var)\n  (prog (risch-logptdx risch-expflag risch-expstuff risch-expint risch-y)\n     (setq risch-expstuff '(0 . 1))\n     (cond ((eq risch-mainvar risch-var)\n\t    (return (rischfprog exp risch-ratform risch-var)))\n\t   ((eq (get risch-var 'leadop)\n\t\t'mexpt)\n\t    (setq risch-expflag t)))\n     (multiple-value-setq (risch-y risch-logptdx risch-expint)\n       (rischlogdprog exp risch-ratform risch-intvar risch-liflag risch-var\n\t\t      risch-expflag risch-mainvar risch-expint risch-degree))\n     (dolist (rat risch-logptdx)\n       (let (rischlogeprog-value)\n\t (setq risch-y\n\t       (rischadd (multiple-value-setq (rischlogeprog-value risch-expint)\n\t\t\t   (rischlogeprog rat risch-ratform nil risch-intvar risch-expstuff\n\t\t\t\t\t  risch-var risch-expflag risch-mainvar risch-expint))\n\t\t\t risch-y))))\n     (if varlist\n\t (setq risch-y (rischadd (tryrisch1 risch-expstuff risch-mainvar\n\t\t\t\t\t    risch-ratform risch-intvar risch-liflag\n\t\t\t\t\t    risch-degree)\n\t\t\t   risch-y)))\n     (return (if risch-expint\n\t\t (rischadd (rischexppoly risch-expint risch-var\n\t\t\t\t\t risch-ratform risch-intvar risch-liflag\n\t\t\t\t\t risch-degree risch-mainvar)"
+        }
+      }
+    ]
+  },
+  "arms": {
+    "none": {
+      "usage": {
+        "inputTokens": 82310,
+        "outputTokens": 1873,
+        "totalTokens": 84183,
+        "cachedInputTokens": 68252,
+        "reasoningTokens": 220,
+        "requests": 14,
+        "turns": 14,
+        "usageComplete": true
+      },
+      "servedModels": [
+        "gpt-6-luna"
+      ],
+      "executionSeconds": 73.948,
+      "stop": "Public tests failed: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/candidate/smoke.py\", line 55, in geometry\n    return s.Line(s.Point(0, 0), s.Point(1, 1)).intersection(\n                  ^^^^^^^^^^^^^\n  File \"/candidate/sympy/geometry/point.py\", line 110, in __new__\n    raise NotImplementedError(\"CAS reconstruction TODO\")\nNotImplementedError: CAS reconstruction TODO\n\nsets FAIL Traceback (most recent call last):\n  File \"/bench/src/cas/runner.py\", line 32, in public\n    assert smoke.CHECKS[name](sympy, sympy.Symbol(\"x\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/candidate/smoke.py\", line 60, in sets\n    return s.Interval(0, 3).intersect(s.Interval.open(1, 4)) == s.Interval.Lopen(1, 3)\n           ^^^^^^^^^^^^^^^^\n  File \"/candidate/sympy/sets/sets.py\", line 933, in __new__\n    raise NotImplementedError(\"CAS reconstruction TODO\")\nNotImplementedError: CAS reconstruction TODO\n\ncalculus FAIL Traceback (most recent call last):\n  File \"/bench/src/cas/runner.py\", line 32, in public\n    assert smoke.CHECKS[name](sympy, sympy.Symbol(\"x\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/candidate/smoke.py\", line 64, in calculus\n    return s.finite_diff_weights(1, [-1, 0, 1], 0)[1][-1] == [-s.S.Half, 0, s.S.Half]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/candidate/sympy/calculus/finite_diff.py\", line 165, in finite_diff_weights\n    raise NotImplementedError(\"CAS reconstruction TODO\")\nNotImplementedError: CAS reconstruction TODO\n\nprinting FAIL Traceback (most recent call last):\n  File \"/bench/src/cas/runner.py\", line 32, in public\n    assert smoke.CHECKS[name](sympy, sympy.Symbol(\"x\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/candidate/smoke.py\", line 68, in printing\n    return s.latex(s.sqrt(x)) == r\"\\sqrt{x}\"\n                   ^^^^^^^^^\n  File \"/candidate/sympy/functions/elementary/miscellaneous.py\", line 147, in sqrt\n    raise NotImplementedError(\"CAS reconstruction TODO\")\nNotImplementedError: CAS reconstruction TODO\n\n",
+      "agentFinal": "",
+      "turns": 14,
+      "files": {
+        "sympy/calculus/accumulationbounds.py": {
+          "addedPhysical": 71,
+          "removedPhysical": 226,
+          "addedCode": 71,
+          "holeCode": 57,
+          "changedFunctions": [
+            {
+              "name": "AccumulationBounds.__new__",
+              "lines": 8
+            },
+            {
+              "name": "AccumulationBounds._eval_is_real",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.min",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.max",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.delta",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.mid",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds._eval_power",
+              "lines": 14
+            },
+            {
+              "name": "AccumulationBounds.__add__",
+              "lines": 2
+            },
+            {
+              "name": "AccumulationBounds.__neg__",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.__sub__",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.__rsub__",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.__mul__",
+              "lines": 3
+            },
+            {
+              "name": "AccumulationBounds.__truediv__",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.__rtruediv__",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.__pow__",
+              "lines": 2
+            },
+            {
+              "name": "AccumulationBounds.__rpow__",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.__abs__",
+              "lines": 3
+            },
+            {
+              "name": "AccumulationBounds.__contains__",
+              "lines": 2
+            },
+            {
+              "name": "AccumulationBounds.intersection",
+              "lines": 5
+            },
+            {
+              "name": "AccumulationBounds.union",
+              "lines": 2
+            },
+            {
+              "name": "_eval_is_le",
+              "lines": 1
+            },
+            {
+              "name": "_eval_is_le",
+              "lines": 1
+            },
+            {
+              "name": "_eval_is_ge",
+              "lines": 1
+            },
+            {
+              "name": "_eval_is_ge",
+              "lines": 1
+            },
+            {
+              "name": "_eval_is_ge",
+              "lines": 1
+            }
+          ]
+        }
+      },
+      "groups": {
+        "polys": {
+          "private": [
+            1,
+            96
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": [
+            "sympy/polys/numberfields/tests/test_minpoly.py::test_minpoly_op_algebraic_element_not_impl"
+          ]
+        },
+        "matrices": {
+          "private": [
+            0,
+            92
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "functions": {
+          "private": [
+            0,
+            79
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "integrals": {
+          "private": [
+            0,
+            54
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "solvers": {
+          "private": [
+            0,
+            67
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "simplify": {
+          "private": [
+            0,
+            59
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "series": {
+          "private": [
+            0,
+            68
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "concrete": {
+          "private": [
+            0,
+            26
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "ntheory": {
+          "private": [
+            1,
+            40
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": [
+            "sympy/ntheory/tests/test_digits.py::test_num_digits"
+          ]
+        },
+        "combinatorics": {
+          "private": [
+            0,
+            48
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "tensor": {
+          "private": [
+            0,
+            56
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "geometry": {
+          "private": [
+            0,
+            44
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "sets": {
+          "private": [
+            0,
+            54
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "calculus": {
+          "private": [
+            0,
+            22
+          ],
+          "public": 0,
+          "holeCode": 57,
+          "passedCases": []
+        },
+        "printing": {
+          "private": [
+            2,
+            92
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": [
+            "sympy/printing/tests/test_octave.py::test_octave_not_supported_not_on_whitelist",
+            "sympy/printing/tests/test_rust.py::test_sparse_matrix"
+          ]
+        }
+      },
+      "privateScore": 0.0038103864734299517,
+      "historyEvents": [
+        {
+          "event": 6,
+          "tool": "search_source",
+          "scope": "history",
+          "query": "class AccumulationBounds",
+          "filter": "sympy",
+          "hits": []
+        }
+      ],
+      "edits": [
+        {
+          "event": 16,
+          "path": "sympy/calculus/accumulationbounds.py",
+          "sources": []
+        }
+      ]
+    },
+    "matched": {
+      "usage": {
+        "inputTokens": 92104,
+        "outputTokens": 1621,
+        "totalTokens": 93725,
+        "cachedInputTokens": 81862,
+        "reasoningTokens": 267,
+        "requests": 16,
+        "turns": 16,
+        "usageComplete": true
+      },
+      "servedModels": [
+        "gpt-6-luna"
+      ],
+      "executionSeconds": 109.562,
+      "stop": "Public tests failed: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/candidate/smoke.py\", line 55, in geometry\n    return s.Line(s.Point(0, 0), s.Point(1, 1)).intersection(\n                  ^^^^^^^^^^^^^\n  File \"/candidate/sympy/geometry/point.py\", line 110, in __new__\n    raise NotImplementedError(\"CAS reconstruction TODO\")\nNotImplementedError: CAS reconstruction TODO\n\nsets FAIL Traceback (most recent call last):\n  File \"/bench/src/cas/runner.py\", line 32, in public\n    assert smoke.CHECKS[name](sympy, sympy.Symbol(\"x\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/candidate/smoke.py\", line 60, in sets\n    return s.Interval(0, 3).intersect(s.Interval.open(1, 4)) == s.Interval.Lopen(1, 3)\n           ^^^^^^^^^^^^^^^^\n  File \"/candidate/sympy/sets/sets.py\", line 933, in __new__\n    raise NotImplementedError(\"CAS reconstruction TODO\")\nNotImplementedError: CAS reconstruction TODO\n\ncalculus FAIL Traceback (most recent call last):\n  File \"/bench/src/cas/runner.py\", line 32, in public\n    assert smoke.CHECKS[name](sympy, sympy.Symbol(\"x\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/candidate/smoke.py\", line 64, in calculus\n    return s.finite_diff_weights(1, [-1, 0, 1], 0)[1][-1] == [-s.S.Half, 0, s.S.Half]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/candidate/sympy/calculus/finite_diff.py\", line 165, in finite_diff_weights\n    raise NotImplementedError(\"CAS reconstruction TODO\")\nNotImplementedError: CAS reconstruction TODO\n\nprinting FAIL Traceback (most recent call last):\n  File \"/bench/src/cas/runner.py\", line 32, in public\n    assert smoke.CHECKS[name](sympy, sympy.Symbol(\"x\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/candidate/smoke.py\", line 68, in printing\n    return s.latex(s.sqrt(x)) == r\"\\sqrt{x}\"\n                   ^^^^^^^^^\n  File \"/candidate/sympy/functions/elementary/miscellaneous.py\", line 147, in sqrt\n    raise NotImplementedError(\"CAS reconstruction TODO\")\nNotImplementedError: CAS reconstruction TODO\n\n",
+      "agentFinal": "",
+      "turns": 16,
+      "files": {
+        "sympy/calculus/accumulationbounds.py": {
+          "addedPhysical": 37,
+          "removedPhysical": 26,
+          "addedCode": 37,
+          "holeCode": 37,
+          "changedFunctions": [
+            {
+              "name": "AccumulationBounds.__new__",
+              "lines": 7
+            },
+            {
+              "name": "AccumulationBounds._eval_is_real",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.min",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.max",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.delta",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.mid",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds._eval_power",
+              "lines": 4
+            },
+            {
+              "name": "AccumulationBounds.__add__",
+              "lines": 2
+            },
+            {
+              "name": "AccumulationBounds.__neg__",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.__sub__",
+              "lines": 2
+            },
+            {
+              "name": "AccumulationBounds.__rsub__",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.__mul__",
+              "lines": 5
+            },
+            {
+              "name": "AccumulationBounds.__truediv__",
+              "lines": 4
+            },
+            {
+              "name": "AccumulationBounds.__rtruediv__",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.__pow__",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.__rpow__",
+              "lines": 1
+            },
+            {
+              "name": "AccumulationBounds.__abs__",
+              "lines": 3
+            }
+          ]
+        }
+      },
+      "groups": {
+        "polys": {
+          "private": [
+            1,
+            96
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": [
+            "sympy/polys/numberfields/tests/test_minpoly.py::test_minpoly_op_algebraic_element_not_impl"
+          ]
+        },
+        "matrices": {
+          "private": [
+            0,
+            92
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "functions": {
+          "private": [
+            0,
+            79
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "integrals": {
+          "private": [
+            0,
+            54
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "solvers": {
+          "private": [
+            0,
+            67
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "simplify": {
+          "private": [
+            0,
+            59
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "series": {
+          "private": [
+            0,
+            68
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "concrete": {
+          "private": [
+            0,
+            26
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "ntheory": {
+          "private": [
+            1,
+            40
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": [
+            "sympy/ntheory/tests/test_digits.py::test_num_digits"
+          ]
+        },
+        "combinatorics": {
+          "private": [
+            0,
+            48
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "tensor": {
+          "private": [
+            0,
+            56
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "geometry": {
+          "private": [
+            0,
+            44
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "sets": {
+          "private": [
+            0,
+            54
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": []
+        },
+        "calculus": {
+          "private": [
+            0,
+            22
+          ],
+          "public": 0,
+          "holeCode": 37,
+          "passedCases": []
+        },
+        "printing": {
+          "private": [
+            2,
+            92
+          ],
+          "public": 0,
+          "holeCode": 0,
+          "passedCases": [
+            "sympy/printing/tests/test_octave.py::test_octave_not_supported_not_on_whitelist",
+            "sympy/printing/tests/test_rust.py::test_sparse_matrix"
+          ]
+        }
+      },
+      "privateScore": 0.0038103864734299517,
+      "historyEvents": [
+        {
+          "event": 4,
+          "tool": "search_source",
+          "scope": "history",
+          "query": "class accumulationbounds",
+          "filter": "",
+          "hits": [
+            {
+              "path": "history/jas/src/edu/jas/gb/GroebnerBaseSeqPairDistributed.java",
+              "start": 649,
+              "content": "        return \"\" + this.getClass().getName();\n    }\n}\n\n\n/**\n * Distributed GB transport message for requests.\n */\n\nclass GBSPTransportMessReq extends GBSPTransportMess {\n\n\n    public GBSPTransportMessReq() {\n    }\n}\n\n\n/**\n * Distributed GB transport message for termination.\n */\n\nclass GBSPTransportMessEnd extends GBSPTransportMess {\n\n\n    public GBSPTransportMessEnd() {\n    }\n}\n\n\n/**\n * Distributed GB transport message for polynomial.\n */\n\nclass GBSPTransportMessPoly<C extends RingElem<C>> extends GBSPTransportMess {\n\n"
+            },
+            {
+              "path": "history/jas/src/edu/jas/poly/Complex.java",
+              "start": 1,
+              "content": "/*\n * $Id$\n */\n\npackage edu.jas.poly;\n\n\nimport org.apache.logging.log4j.LogManager;\nimport org.apache.logging.log4j.Logger;\n\nimport edu.jas.arith.BigComplex;\nimport edu.jas.arith.BigDecimal;\nimport edu.jas.arith.BigInteger;\nimport edu.jas.arith.BigRational;\nimport edu.jas.structure.GcdRingElem;\nimport edu.jas.structure.RingElem;\nimport edu.jas.structure.StarRingElem;\n\n\n/**\n * Generic Complex class implementing the RingElem interface. Objects of this\n * class are immutable.\n * @param <C> base type of RingElem (for complex polynomials).\n * @author Heinz Kredel\n */\npublic class Complex<C extends RingElem<C>> implements StarRingElem<Complex<C>>, GcdRingElem<Complex<C>> {\n\n\n    private static final Logger logger = LogManager.getLogger(Complex.class);\n\n\n    private static final boolean debug = logger.isDebugEnabled();\n\n\n    /**\n     * Complex class factory data structure."
+            },
+            {
+              "path": "history/jas/src/edu/jas/gb/GBTransportMess.java",
+              "start": 37,
+              "content": "\n/**\n * Distributed GB transport message for requests.\n */\n\nfinal class GBTransportMessReq extends GBTransportMess {\n\n\n    public GBTransportMessReq() {\n    }\n}\n\n\n/**\n * Distributed GB transport message for termination.\n */\n\nfinal class GBTransportMessEnd extends GBTransportMess {\n\n\n    public GBTransportMessEnd() {\n    }\n}\n\n\n/**\n * Distributed GB transport message for polynomial.\n */\n\nfinal class GBTransportMessPoly<C extends RingElem<C>> extends GBTransportMess {\n\n\n    /**\n     * The polynomial to transport.\n     */\n    public final GenPolynomial<C> pol;"
+            },
+            {
+              "path": "history/jas/src/edu/jas/poly/Residue.java",
+              "start": 1,
+              "content": "/*\n * $Id$\n */\n\npackage edu.jas.poly;\n\n\nimport org.apache.logging.log4j.LogManager;\nimport org.apache.logging.log4j.Logger;\n\nimport edu.jas.kern.PrettyPrint;\nimport edu.jas.structure.GcdRingElem;\nimport edu.jas.structure.NotInvertibleException;\nimport edu.jas.structure.RingElem;\n\n\n/**\n * Residue element based on RingElem residue. Objects of this class are (nearly)\n * immutable.\n * @author Heinz Kredel\n */\npublic class Residue<C extends RingElem<C>> implements RingElem<Residue<C>> {\n\n\n    private static final Logger logger = LogManager.getLogger(Residue.class);\n\n\n    private static final boolean debug = logger.isDebugEnabled();\n\n\n    /**\n     * Residue class factory data structure.\n     */\n    protected final ResidueRing<C> ring;\n\n"
+            },
+            {
+              "path": "history/jas/src/edu/jas/poly/Quotient.java",
+              "start": 1,
+              "content": "/*\n * $Id$\n */\n\npackage edu.jas.poly;\n\n\nimport org.apache.logging.log4j.LogManager;\nimport org.apache.logging.log4j.Logger;\n\nimport edu.jas.kern.PrettyPrint;\nimport edu.jas.structure.GcdRingElem;\nimport edu.jas.structure.QuotPair;\nimport edu.jas.structure.RingElem;\n\n\n/**\n * Quotient element based on RingElem pairs. Objects of this class are\n * immutable.\n * @author Heinz Kredel\n */\npublic class Quotient<C extends RingElem<C>> implements RingElem<Quotient<C>>, QuotPair<C> {\n\n\n    private static final Logger logger = LogManager.getLogger(Quotient.class);\n\n\n    private static final boolean debug = logger.isDebugEnabled();\n\n\n    /**\n     * Quotient class factory data structure.\n     */\n    public final QuotientRing<C> ring;\n\n"
+            }
+          ]
+        }
+      ],
+      "edits": [
+        {
+          "event": 18,
+          "path": "sympy/calculus/accumulationbounds.py",
+          "sources": []
+        }
+      ]
+    }
+  },
+  "caseDifferences": {
+    "polys": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "matrices": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "functions": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "integrals": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "solvers": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "simplify": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "series": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "concrete": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "ntheory": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "combinatorics": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "tensor": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "geometry": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "sets": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "calculus": {
+      "matchedOnly": [],
+      "noneOnly": []
+    },
+    "printing": {
+      "matchedOnly": [],
+      "noneOnly": []
+    }
+  }
+}

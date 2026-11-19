@@ -34,6 +34,11 @@ const { values } = parseArgs({
     controls: { type: "boolean" },
   },
 });
+if (values.task === "cas-reconstruction-v1") {
+  const { runPair } = await import("../cas-pilot/pair.ts");
+  await runPair(values);
+  process.exit(0);
+}
 const batch = values.batch!;
 assert(/^[\w-]+$/.test(batch));
 const tasks = fixtures.filter((f) => {

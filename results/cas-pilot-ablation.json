@@ -1,0 +1,223 @@
+{
+  "task": "cas-reconstruction-v1",
+  "commit": "16fa855354eb7bcabd3fe10993841e03b1382692",
+  "starterSHA256": "77929ab53ec6f607361755670b9c3127384b8fb068b76084ae76c468f24dd3aa",
+  "suite": "public",
+  "probeSHA256": "f8416cd2b3f88a9f3478ba203095667591732ca545629225bbd29fafb6033b07",
+  "python": "3.12.7",
+  "groundTypes": "python",
+  "groups": {
+    "calculus": {
+      "filesReplaced": 5,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/calculus/finite_diff.py:165"
+      },
+      "detected": true
+    },
+    "combinatorics": {
+      "filesReplaced": 23,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/combinatorics/permutations.py:835"
+      },
+      "detected": true
+    },
+    "concrete": {
+      "filesReplaced": 7,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/concrete/summations.py:508"
+      },
+      "detected": true
+    },
+    "functions": {
+      "filesReplaced": 24,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/functions/elementary/trigonometric.py:190"
+      },
+      "detected": true
+    },
+    "geometry": {
+      "filesReplaced": 9,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/geometry/point.py:110"
+      },
+      "detected": true
+    },
+    "integrals": {
+      "filesReplaced": 15,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/integrals/integrals.py:703"
+      },
+      "detected": true
+    },
+    "matrices": {
+      "filesReplaced": 43,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/matrices/repmatrix.py:362"
+      },
+      "detected": true
+    },
+    "ntheory": {
+      "filesReplaced": 14,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/ntheory/factor_.py:812"
+      },
+      "detected": true
+    },
+    "polys": {
+      "filesReplaced": 96,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/polys/polytools.py:4378"
+      },
+      "detected": true
+    },
+    "printing": {
+      "filesReplaced": 37,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/printing/printer.py:314"
+      },
+      "detected": true
+    },
+    "series": {
+      "filesReplaced": 14,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/series/limits.py:66"
+      },
+      "detected": true
+    },
+    "sets": {
+      "filesReplaced": 15,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/sets/sets.py:933"
+      },
+      "detected": true
+    },
+    "simplify": {
+      "filesReplaced": 14,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/simplify/trigsimp.py:281"
+      },
+      "detected": true
+    },
+    "solvers": {
+      "filesReplaced": 19,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/solvers/solvers.py:663"
+      },
+      "detected": true
+    },
+    "tensor": {
+      "filesReplaced": 19,
+      "golden": {
+        "imported": true,
+        "passed": true
+      },
+      "ablated": {
+        "imported": true,
+        "passed": false,
+        "error": "NotImplementedError: CAS reconstruction TODO",
+        "location": "sympy/tensor/array/dense_ndim_array.py:109"
+      },
+      "detected": true
+    }
+  },
+  "detected": 15,
+  "total": 15
+}

@@ -1,0 +1,147 @@
+{
+  "batch": "cas-family-v1",
+  "arm": "matched",
+  "repairs": {
+    "sympy/matrices/repmatrix.py": {
+      "error": "unterminated triple-quoted string literal (detected at line 752) (<unknown>, line 751)",
+      "fromCommit": "cb57e2580e24287d0ce86fa700f029c6718a1ad0",
+      "restoredSHA256": "a2633964c62996da100b55d92c74bd4ba73d3968d10bb754003c8c9fb60d69d2"
+    },
+    "sympy/solvers/solvers.py": {
+      "error": "unexpected indent (<unknown>, line 738)",
+      "fromCommit": "cb57e2580e24287d0ce86fa700f029c6718a1ad0",
+      "restoredSHA256": "2a2a77590075c678c3eeaf95119a0c547eaf4822fb2e343147ae7ecfbe0fb0e1"
+    }
+  },
+  "diagnosticOnly": true,
+  "groups": {
+    "public": {
+      "polys": [
+        0,
+        1
+      ],
+      "matrices": [
+        0,
+        1
+      ],
+      "functions": [
+        0,
+        1
+      ],
+      "integrals": [
+        0,
+        1
+      ],
+      "solvers": [
+        0,
+        1
+      ],
+      "simplify": [
+        0,
+        1
+      ],
+      "series": [
+        0,
+        1
+      ],
+      "concrete": [
+        0,
+        1
+      ],
+      "ntheory": [
+        0,
+        1
+      ],
+      "combinatorics": [
+        0,
+        1
+      ],
+      "tensor": [
+        0,
+        1
+      ],
+      "geometry": [
+        0,
+        1
+      ],
+      "sets": [
+        0,
+        1
+      ],
+      "calculus": [
+        0,
+        1
+      ],
+      "printing": [
+        0,
+        1
+      ]
+    },
+    "private": {
+      "polys": [
+        1,
+        96
+      ],
+      "matrices": [
+        0,
+        92
+      ],
+      "functions": [
+        0,
+        79
+      ],
+      "integrals": [
+        0,
+        54
+      ],
+      "solvers": [
+        0,
+        67
+      ],
+      "simplify": [
+        0,
+        59
+      ],
+      "series": [
+        0,
+        68
+      ],
+      "concrete": [
+        0,
+        26
+      ],
+      "ntheory": [
+        1,
+        40
+      ],
+      "combinatorics": [
+        0,
+        48
+      ],
+      "tensor": [
+        0,
+        56
+      ],
+      "geometry": [
+        0,
+        44
+      ],
+      "sets": [
+        0,
+        54
+      ],
+      "calculus": [
+        0,
+        22
+      ],
+      "printing": [
+        2,
+        92
+      ]
+    }
+  },
+  "totals": {
+    "public": 0,
+    "private": 4
+  }
+}

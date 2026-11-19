@@ -1,0 +1,362 @@
+{
+  "task": "cas-reconstruction-v1",
+  "commit": "16fa855354eb7bcabd3fe10993841e03b1382692",
+  "archiveSHA256": "5daac3107116df5659d7c20760fa6684773739089c120ecd6eca5ea4f355a02a",
+  "starterSHA256": "77929ab53ec6f607361755670b9c3127384b8fb068b76084ae76c468f24dd3aa",
+  "removedCodeLines": 108059,
+  "bodies": 11930,
+  "files": 354,
+  "packages": {
+    "calculus": {
+      "files": 5,
+      "removedCodeLines": 839,
+      "bodies": 48
+    },
+    "combinatorics": {
+      "files": 23,
+      "removedCodeLines": 6996,
+      "bodies": 580
+    },
+    "concrete": {
+      "files": 7,
+      "removedCodeLines": 1690,
+      "bodies": 90
+    },
+    "functions": {
+      "files": 24,
+      "removedCodeLines": 11532,
+      "bodies": 1540
+    },
+    "geometry": {
+      "files": 9,
+      "removedCodeLines": 2798,
+      "bodies": 341
+    },
+    "integrals": {
+      "files": 15,
+      "removedCodeLines": 8057,
+      "bodies": 403
+    },
+    "matrices": {
+      "files": 43,
+      "removedCodeLines": 7398,
+      "bodies": 1181
+    },
+    "ntheory": {
+      "files": 14,
+      "removedCodeLines": 3272,
+      "bodies": 202
+    },
+    "polys": {
+      "files": 96,
+      "removedCodeLines": 25261,
+      "bodies": 3725
+    },
+    "printing": {
+      "files": 37,
+      "removedCodeLines": 11548,
+      "bodies": 1771
+    },
+    "series": {
+      "files": 14,
+      "removedCodeLines": 2351,
+      "bodies": 241
+    },
+    "sets": {
+      "files": 15,
+      "removedCodeLines": 2549,
+      "bodies": 431
+    },
+    "simplify": {
+      "files": 14,
+      "removedCodeLines": 6349,
+      "bodies": 234
+    },
+    "solvers": {
+      "files": 19,
+      "removedCodeLines": 11555,
+      "bodies": 461
+    },
+    "tensor": {
+      "files": 19,
+      "removedCodeLines": 5864,
+      "bodies": 682
+    }
+  },
+  "python": "3.12.7",
+  "groupCountsFormat": "[passed, total]",
+  "controls": {
+    "starter": {
+      "public": {
+        "score": 0.0,
+        "passed": 0,
+        "checks": 15,
+        "groups": {
+          "polys": [
+            0,
+            1
+          ],
+          "matrices": [
+            0,
+            1
+          ],
+          "functions": [
+            0,
+            1
+          ],
+          "integrals": [
+            0,
+            1
+          ],
+          "solvers": [
+            0,
+            1
+          ],
+          "simplify": [
+            0,
+            1
+          ],
+          "series": [
+            0,
+            1
+          ],
+          "concrete": [
+            0,
+            1
+          ],
+          "ntheory": [
+            0,
+            1
+          ],
+          "combinatorics": [
+            0,
+            1
+          ],
+          "tensor": [
+            0,
+            1
+          ],
+          "geometry": [
+            0,
+            1
+          ],
+          "sets": [
+            0,
+            1
+          ],
+          "calculus": [
+            0,
+            1
+          ],
+          "printing": [
+            0,
+            1
+          ]
+        }
+      },
+      "private": {
+        "score": 0.0038103864734299517,
+        "passed": 4,
+        "checks": 897,
+        "groups": {
+          "polys": [
+            1,
+            96
+          ],
+          "matrices": [
+            0,
+            92
+          ],
+          "functions": [
+            0,
+            79
+          ],
+          "integrals": [
+            0,
+            54
+          ],
+          "solvers": [
+            0,
+            67
+          ],
+          "simplify": [
+            0,
+            59
+          ],
+          "series": [
+            0,
+            68
+          ],
+          "concrete": [
+            0,
+            26
+          ],
+          "ntheory": [
+            1,
+            40
+          ],
+          "combinatorics": [
+            0,
+            48
+          ],
+          "tensor": [
+            0,
+            56
+          ],
+          "geometry": [
+            0,
+            44
+          ],
+          "sets": [
+            0,
+            54
+          ],
+          "calculus": [
+            0,
+            22
+          ],
+          "printing": [
+            2,
+            92
+          ]
+        }
+      }
+    },
+    "restored": {
+      "public": {
+        "score": 1.0,
+        "passed": 15,
+        "checks": 15,
+        "groups": {
+          "polys": [
+            1,
+            1
+          ],
+          "matrices": [
+            1,
+            1
+          ],
+          "functions": [
+            1,
+            1
+          ],
+          "integrals": [
+            1,
+            1
+          ],
+          "solvers": [
+            1,
+            1
+          ],
+          "simplify": [
+            1,
+            1
+          ],
+          "series": [
+            1,
+            1
+          ],
+          "concrete": [
+            1,
+            1
+          ],
+          "ntheory": [
+            1,
+            1
+          ],
+          "combinatorics": [
+            1,
+            1
+          ],
+          "tensor": [
+            1,
+            1
+          ],
+          "geometry": [
+            1,
+            1
+          ],
+          "sets": [
+            1,
+            1
+          ],
+          "calculus": [
+            1,
+            1
+          ],
+          "printing": [
+            1,
+            1
+          ]
+        }
+      },
+      "private": {
+        "score": 1.0,
+        "passed": 897,
+        "checks": 897,
+        "groups": {
+          "polys": [
+            96,
+            96
+          ],
+          "matrices": [
+            92,
+            92
+          ],
+          "functions": [
+            79,
+            79
+          ],
+          "integrals": [
+            54,
+            54
+          ],
+          "solvers": [
+            67,
+            67
+          ],
+          "simplify": [
+            59,
+            59
+          ],
+          "series": [
+            68,
+            68
+          ],
+          "concrete": [
+            26,
+            26
+          ],
+          "ntheory": [
+            40,
+            40
+          ],
+          "combinatorics": [
+            48,
+            48
+          ],
+          "tensor": [
+            56,
+            56
+          ],
+          "geometry": [
+            44,
+            44
+          ],
+          "sets": [
+            54,
+            54
+          ],
+          "calculus": [
+            22,
+            22
+          ],
+          "printing": [
+            92,
+            92
+          ]
+        }
+      }
+    }
+  }
+}

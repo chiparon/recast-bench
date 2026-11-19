@@ -53,13 +53,27 @@ const tools = [
 const hash = (content: string | null) =>
   content === null ? null : createHash("sha256").update(content).digest("hex");
 
-export async function runRealRaw(input: MethodOptions, signal: AbortSignal) {
+export interface RawWorkspace {
+  tools: DeepSeekToolDefinition[];
+  instructions: string;
+  reviewHandoff?: boolean;
+  execute(name: string, args: Record<string, any>): Promise<unknown>;
+}
+
+export async function runRealRaw(
+  input: MethodOptions,
+  signal: AbortSignal,
+  workspace?: (root: string) => RawWorkspace,
+  sharedSnapshot?: { outputRoot: string; baselineCommit: string },
+) {
   const { task, client } = input;
-  const snapshot = await new RealProjectFiles(input.runRoot).snapshot(
-    input.sourceRoot,
-    randomUUID(),
-    signal,
-  );
+  const snapshot =
+    sharedSnapshot ??
+    (await new RealProjectFiles(input.runRoot).snapshot(
+      input.sourceRoot,
+      randomUUID(),
+      signal,
+    ));
   const { outputRoot, baselineCommit } = snapshot;
   const fs = new TranslationWorkspaceFiles(outputRoot);
   const inventory = {
@@ -67,6 +81,15 @@ export async function runRealRaw(input: MethodOptions, signal: AbortSignal) {
     writeFiles: task.modules.map((m) => m.path),
     moduleTests: Object.keys(task.moduleTestCommands ?? {}),
   };
+  const paged = workspace?.(outputRoot);
+  const offered = paged
+    ? [
+        ...paged.tools,
+        ...tools.filter((t) =>
+          ["compile", "run_tests", "finish"].includes(t.name),
+        ),
+      ]
+    : tools;
   const messages: DeepSeekToolMessage[] = [
     {
       role: "system",
@@ -77,8 +100,9 @@ export async function runRealRaw(input: MethodOptions, signal: AbortSignal) {
       role: "user",
       content:
         task.requirement +
-        "\n\nWorkspace inventory:\n" +
-        JSON.stringify(inventory),
+        (paged
+          ? "\n\n" + paged.instructions
+          : "\n\nWorkspace inventory:\n" + JSON.stringify(inventory)),
     },
   ];
   const events: {
@@ -105,14 +129,32 @@ export async function runRealRaw(input: MethodOptions, signal: AbortSignal) {
     error: string | null = null;
   let turns = 0,
     message = "";
+  let returnedFailure = false;
+  async function review() {
+    if (!paged?.reviewHandoff || returnedFailure) return null;
+    const result = await test();
+    if (result.success) return null;
+    returnedFailure = true;
+    return {
+      feedback:
+        "The family acceptance check failed. Inspect the failure and try a general implementation or dependency repair before handing off this family again.",
+      output: result.output.slice(-3200),
+    };
+  }
   try {
     outer: while (true) {
       signal.throwIfAborted();
       turns++;
-      const reply = await client.complete(messages, tools, signal);
+      const reply = await client.complete(messages, offered, signal);
       const calls = reply.toolCalls ?? [];
       message = reply.content ?? "";
-      if (!calls.length) break;
+      if (!calls.length) {
+        const feedback = await review();
+        if (!feedback) break;
+        if (message) messages.push({ role: "assistant", content: message });
+        messages.push({ role: "user", content: JSON.stringify(feedback) });
+        continue;
+      }
       messages.push({ role: "assistant", content: message, toolCalls: calls });
       for (const call of calls) {
         const event = {
@@ -123,11 +165,17 @@ export async function runRealRaw(input: MethodOptions, signal: AbortSignal) {
         let output: unknown;
         try {
           const args = JSON.parse(call.arguments);
-          if (call.name === "finish") break outer;
-          if (call.name === "list_files") output = inventory;
+          if (call.name === "finish") {
+            output = await review();
+            if (!output) break outer;
+          } else if (paged?.tools.some((t) => t.name === call.name)) {
+            event.path = args.path;
+            output = await paged.execute(call.name, args);
+          } else if (call.name === "list_files" && !paged) output = inventory;
           else if (call.name === "compile") output = await build();
           else if (call.name === "run_tests") output = await test(args.module);
           else {
+            if (paged) throw Error("Tool outside paged workspace");
             if (!inventory.readFiles.includes(args.path))
               throw Error("File is outside the readable inventory");
             const path: string = args.path;
@@ -220,6 +268,15 @@ export async function runRealRaw(input: MethodOptions, signal: AbortSignal) {
     commit,
     error,
     indexMs: null,
-    runtime: { ...snapshot, agent: { turns, events, message, error } },
+    runtime: {
+      ...snapshot,
+      agent: {
+        turns,
+        events,
+        message,
+        error,
+        ...(paged?.reviewHandoff && { returnedFailure }),
+      },
+    },
   };
 }

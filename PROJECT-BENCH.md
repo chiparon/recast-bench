@@ -2,6 +2,10 @@
 
 本实验的单位是一次完整项目交付。每个项目的需求、起始文件、可读参考、模块边界和公开测试全部固定。在同一个模型内配对比较三种执行方式，观察通过外部验收所需的时间和 Token。
 
+## 十万行实现重建先导题
+
+SymPy 任务实际挖去 108,059 行生产实现，另配四种语言的计算代数历史源码。提供可分发的选手包、逐族回归评分、单族消融和代码触达实测。[任务说明与复现](src/cas-pilot/README.md) · [选手 ZIP](repro/cas-reconstruction-v1.zip) · [有历史与无历史配对成绩](results/cas-pair-v2.md) · [逐族 SAG2 配对成绩](results/cas-family-v1.md) · [构题路线比较](src/cas-pilot/DESIGN.md)
+
 ## 十万行 Django 四种 harness 对照
 
 [HTML 报告](results/large-v3.html) · [逐次数据](results/large-v3-trials.csv) · [分组汇总](results/large-v3-summary.csv) · [独立回放归档](results/large-v3-evidence.json.gz) · [人民币计费依据](src/large-projects/BILLING.md)
