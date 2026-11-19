@@ -4,11 +4,11 @@
   "project": "sqlparse",
   "modelRequests": 0,
   "runtime": {
-    "outputRoot": "E:\\Eproject\\recast-bench-nl2repo\\work\\nl2repo\\preflight\\cli-Qy0yXj\\project-pipelines\\e8c21237-a134-4164-81a6-d0985c2c4432\\project",
-    "baselineCommit": "26d16c4a19b38ce1f2c959b97afc61ef36be34bb",
+    "outputRoot": "E:\\Eproject\\recast-bench-nl2repo\\work\\nl2repo\\preflight\\cli-IR10C0\\project-pipelines\\0a755503-a75e-45b8-9f0c-1503f8cae3e3\\project",
+    "baselineCommit": "60fb9a5b5c8468e8b5c97871f01f5ccd5abf6701",
     "agent": {
       "version": "codex-cli 0.169.0",
-      "threadId": "01a1eee3-1e09-7ab1-9810-768633ae1c86",
+      "threadId": "01a1f16f-6b42-70d3-af64-5b6300084df1",
       "turnId": null,
       "status": "preflight",
       "events": [],

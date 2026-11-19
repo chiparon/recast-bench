@@ -107,3 +107,9 @@ npm run controls:nl2repo
 已生成 112 个生产文件的声明骨架与完整公共题包，并通过 8 项构题/判分单元测试和 5 项双快照一致性测试。五题 Linux 隔离基线均已通过：sqlparse 461、Rich-Click 139、DeepDiff 970、Boltons 423、Jinja 911。Rich-Click 实际收集 143 项，其中 4 项跳过；使用 139 个有效用例，不把目录中标注的 145 当作分母。空骨架控制与完整日志见准备报告。
 
 Codex CLI 0.169.0 已完成真实 app-server 初始化与建会话预检，预检没有请求模型推理。正式配对采用用户选定的 `gpt-6-luna`，两组相同预算；正式比较以 `results/nl2repo/<batch>/` 的完整配对结果为准。
+
+## 五题 high 配对结果
+
+两组使用 gpt-6-luna、high 推理，未设置实验 Token、时间或单次响应输出上限。sqlparse 复用此前相同协议的两次运行。其余四题使用相同输入和私有测试重新生成并评分。
+
+[首轮明细](results/nl2repo-five-unlimited-high-v1.md)保留 Jinja Codex 上游响应中断的记录（0/911）。仅重跑这一项，其余九项沿用首轮记录。[最终配对比较](results/nl2repo-five-unlimited-high-v1-retry-comparison.md)采用重跑结果（117/911）。计入中断尝试后，Codex 累计 108,965,639 Token，端到端耗时合计 2:38:34。
