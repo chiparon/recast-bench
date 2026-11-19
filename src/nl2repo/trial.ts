@@ -73,8 +73,8 @@ try {
   if (method === "codex") output = await runCodex({ ...common, onCall,
     homeRoot: codexHomeRoot() });
   else {
-    const transport = meterExisting(protocol.model, onCall, protocol.effort);
-    try { output = await runRealMethod({ ...common, arm: "recast", client: transport.client }); }
+    const transport = meterExisting(protocol.model, onCall, protocol.effort, protocol.seconds === null);
+    try { output = await runRealMethod({ ...common, arm: "recast", disableModuleTimeout: protocol.seconds === null, client: transport.client }); }
     finally { transport.close(); }
   }
 } catch (e) { error = String(e); }

@@ -29,4 +29,5 @@ export interface MethodOptions {
   runRoot: string;
   client: WorkspaceTranslationModelClient;
   signal?: AbortSignal;
+  disableModuleTimeout?: boolean;
 }

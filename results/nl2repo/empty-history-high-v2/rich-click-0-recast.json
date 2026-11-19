@@ -1,0 +1,58 @@
+{
+  "project": "rich-click",
+  "method": "recast",
+  "repetition": 0,
+  "model": "gpt-6-luna",
+  "effort": "high",
+  "verifiedGenerationRequests": 324,
+  "inputHash": "f7c8765f17c94c62f8f20af9138abf20c051e755e712ab6032b6aebca4841ef7",
+  "controlHash": "53f7c9da93f6af6eae85cef0b11c90f2ac921c2f4005853963ec6d1fd2853561",
+  "startedAt": "2026-11-19T05:03:38.951Z",
+  "executionMs": 3707219.2295,
+  "wallMs": 3711628.8707,
+  "work": "E:\\Eproject\\recast-bench-nl2repo\\work\\nl2repo\\trials\\rich-click-recast-Ia55ei",
+  "outputRoot": "E:\\Eproject\\recast-bench-nl2repo\\work\\nl2repo\\trials\\rich-click-recast-Ia55ei\\project-pipelines\\6279bfef-fa1b-4dd0-ac0f-f9a0450edb83\\project",
+  "commit": "101f2524adb6a4b9fe4b4757a9a371a4d8d5a508",
+  "error": null,
+  "gradingError": null,
+  "budgetStop": null,
+  "usage": {
+    "inputTokens": 24317344,
+    "cachedInputTokens": 20918419,
+    "outputTokens": 324804,
+    "reasoningTokens": 211224,
+    "totalTokens": 24642148,
+    "requests": 324,
+    "usageComplete": true
+  },
+  "grade": {
+    "report": {
+      "collected": [],
+      "phases": {},
+      "collectionErrors": [],
+      "exitCode": 4
+    },
+    "exitCode": 4,
+    "error": null,
+    "wallSeconds": 3.51500000001397,
+    "evidence": "E:\\Eproject\\recast-bench-nl2repo\\work\\nl2repo\\evaluations\\rich-click-a6q8e93a",
+    "score": {
+      "passed": 0,
+      "total": 139,
+      "rate": 0,
+      "missing": 139,
+      "collectionErrors": 0,
+      "unexpected": 0,
+      "allPassed": false
+    }
+  },
+  "score": {
+    "passed": 0,
+    "total": 139,
+    "rate": 0,
+    "missing": 139,
+    "collectionErrors": 0,
+    "unexpected": 0,
+    "allPassed": false
+  }
+}

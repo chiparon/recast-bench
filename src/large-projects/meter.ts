@@ -77,6 +77,7 @@ export function meterExisting(
   model: ProjectModel,
   onCall: (call: MeterCall) => void,
   effort: ReasoningEffort = "low",
+  disableRequestTimeout = false,
 ) {
   const nativeFetch = globalThis.fetch;
   type Observed = {
@@ -105,6 +106,7 @@ export function meterExisting(
   const client = createProjectClient(model, {
     effort,
     uncapped: true,
+    disableRequestTimeout,
     onCall: async (row) => {
       const observed = context.getStore()?.reply;
       if (!observed) throw Error("Provider attempt was not observed");

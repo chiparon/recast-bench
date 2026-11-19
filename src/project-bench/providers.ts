@@ -41,6 +41,7 @@ interface ClientOptions {
   effort?: ReasoningEffort;
   /** Omit bench-imposed task, turn and response caps for the real-project suite. */
   uncapped?: boolean;
+  disableRequestTimeout?: boolean;
   maxTurns?: number;
   maxTokens?: number;
   maxOutputTokens?: number;
@@ -250,7 +251,7 @@ export function createProjectClient(
         response = await fetch(endpoint, {
           method: "POST",
           redirect: "error",
-          signal: AbortSignal.any([signal, AbortSignal.timeout(90_000)]),
+          signal: options.disableRequestTimeout ? signal : AbortSignal.any([signal, AbortSignal.timeout(90_000)]),
           headers: {
             Authorization: "Bearer " + key,
             "Content-Type": "application/json",

@@ -1,0 +1,45 @@
+{
+  "version": "nl2repo-declaration-v1",
+  "model": "gpt-6-luna",
+  "effort": "high",
+  "tokens": null,
+  "seconds": null,
+  "repeats": 1,
+  "projects": [
+    "rich-click",
+    "deepdiff",
+    "boltons",
+    "jinja"
+  ],
+  "methods": [
+    "recast"
+  ],
+  "references": "empty",
+  "score": "fixed-baseline-pass-rate; macro-average-per-project",
+  "productRevision": "a6a3d67513fdcef63293f369b66aae129aa40755",
+  "productDiffHash": "66f48ed8cf100d24e21b06835497324ce032eb4d247ebd82112c7444830b92e0",
+  "implementationHash": "e4d42f79aa37d3484fc09dcf8f954c565c064382a7a66d223a7591fb6345746d",
+  "responseOutputCap": null,
+  "inputs": {
+    "rich-click": {
+      "hash": "f7c8765f17c94c62f8f20af9138abf20c051e755e712ab6032b6aebca4841ef7",
+      "controlHash": "53f7c9da93f6af6eae85cef0b11c90f2ac921c2f4005853963ec6d1fd2853561",
+      "ready": true
+    },
+    "deepdiff": {
+      "hash": "6997bdde19d9fb0436a52261ad4399dae4f0a752068adae1daed36aa5c111715",
+      "controlHash": "38ce6828a3ec8703744fbe277b5edba86c06f3dd2e191b3f9ee468c219865de8",
+      "ready": true
+    },
+    "boltons": {
+      "hash": "cc9c045945f38cb90695e4d6a739325d2e9e7874cc9136031bff18e4a0951dfa",
+      "controlHash": "c2d1c1c9dab7d82fb9ca2eef86626694e5f85b63f09df636e29007315be9ed76",
+      "ready": true
+    },
+    "jinja": {
+      "hash": "833a9480a2f70a2c0502d280133468bccb4a23074a5e0a76ef6f023863e9e6ad",
+      "controlHash": "07d602094a8368ccf842d257e1fc94a9e5437e41535741ab4b10ab898fbf038d",
+      "ready": true
+    }
+  }
+}

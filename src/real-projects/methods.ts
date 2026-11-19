@@ -253,7 +253,7 @@ export async function runRealMethod(options: MethodOptions) {
         workspaceRoot: root,
         compileCommand: scopedCompile ? publicCommand(scopedCompile) : compile,
         maxModelTurns: 1000,
-        timeoutMs: 7_200_000,
+        timeoutMs: options.disableModuleTimeout ? null : 7_200_000,
         client: {
           complete: (messages, tools, child) =>
             client.complete(
